@@ -55,3 +55,8 @@ export interface Turn {
   round: number
   turn: number
 }
+
+export interface CardDeckPersistence {
+  pile: number[]
+  discard: number[]
+}
