@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { name } from '@/../package.json'
 import DifficultyLevel from '@/services/enum/DifficultyLevel'
 import Player from '@/services/enum/Player'
+import Tech from '@/services/enum/Tech'
 
 export const useStateStore = defineStore(`${name}.state`, {
   state: () => {
@@ -57,6 +58,7 @@ export interface Setup {
 export interface Round {
   round: number
   startPlayer: Player
+  prosperityCards: ProsperityCardsPersistence
   botCards: BotCardsPersistence
   draftingTurns: DraftingTurn[]
   constructionTurns: ConstructionTurn[]
@@ -79,4 +81,9 @@ export interface BotCardsPersistence {
 export interface CardDeckPersistence {
   pile: number[]
   discard: number[]
+}
+export interface ProsperityCardsPersistence {
+  pile: Tech[]
+  current: Tech[][]
+  discard: Tech[]
 }

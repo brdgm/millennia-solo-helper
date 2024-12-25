@@ -42,6 +42,7 @@ import { useStateStore, Round } from '@/store/state'
 import Player from '@/services/enum/Player'
 import BotCards from '@/services/BotCards'
 import randomEnum from '@brdgm/brdgm-commons/src/util/random/randomEnum'
+import ProsperityCards from '@/services/ProsperityCards'
 
 export default defineComponent({
   name: 'SetupBot',
@@ -75,6 +76,7 @@ export default defineComponent({
       const round : Round = {
         round: 1,
         startPlayer: this.startPlayer,
+        prosperityCards: ProsperityCards.new().toPersistence(),
         botCards: BotCards.new(this.state.setup.difficultyLevel).toPersistence(),
         draftingTurns: [],
         constructionTurns: []

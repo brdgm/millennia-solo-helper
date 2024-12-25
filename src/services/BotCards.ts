@@ -67,7 +67,7 @@ export default class BotCards {
   }
 
   /**
-   * Re-creates card deck from persistence.
+   * Re-creates from persistence.
    */
   public static fromPersistence(persistence : BotCardsPersistence) : BotCards {
     return new BotCards(
