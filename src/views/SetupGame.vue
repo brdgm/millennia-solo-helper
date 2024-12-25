@@ -18,6 +18,8 @@ import { useStateStore } from '@/store/state'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import DifficultyLevel from '@/components/setup/DifficultyLevel.vue'
 import StartPlayer from '@/components/setup/StartPlayer.vue'
+import randomEnum from '@brdgm/brdgm-commons/src/util/random/randomEnum'
+import Player from '@/services/enum/Player'
 
 export default defineComponent({
   name: 'SetupGame',
@@ -34,6 +36,13 @@ export default defineComponent({
   },
   methods: {
     setupBot() : void {
+      // determine start player
+      if (this.state.setup.startPlayer === undefined) {
+        this.state.setup.initialStartPlayer = randomEnum(Player)
+      }
+      else {
+        this.state.setup.initialStartPlayer = this.state.setup.startPlayer
+      }
       this.$router.push('/setupBot')
     }
   }

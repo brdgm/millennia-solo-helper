@@ -43,6 +43,8 @@ export interface State {
 export interface Setup {
   difficultyLevel: DifficultyLevel
   startPlayer?: Player
+  initialStartPlayer?: Player
+  initialBotPersistence?: BotPersistence
   debugMode?: boolean
 }
 
@@ -55,6 +57,12 @@ export interface Turn {
   turn: number
 }
 
+export interface BotPersistence {
+  draftingRowCards: CardDeckPersistence
+  draftingPriorityCards: CardDeckPersistence
+  constructionCards: CardDeckPersistence
+  warCards: CardDeckPersistence
+}
 export interface CardDeckPersistence {
   pile: number[]
   discard: number[]

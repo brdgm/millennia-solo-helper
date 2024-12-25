@@ -20,6 +20,29 @@
       "hard": "Hard"
     }
   },
+  "setupBot": {
+    "title": "Setup Automa",
+    "setup": {
+      "gameBoard": "Setup the game the same way as a 2-player game.",
+      "playerColor": "Choose a player color for the automa. The automa only needs 2 track tokens.",
+      "trackTokens": "Place the automa track tokens on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
+      "startPlayer": {
+        "player": "<b>You</b> are the start player. Take 10 Gold. Take the first player token.",
+        "bot": "<b>Automa</b> is the start player. Give it the first player token."
+      },
+      "secondPlayer": {
+        "player": "<b>You</b> are the second player. Take 12 Gold. Take the architect token.",
+        "bot": "<b>Automa</b> is the second player. Give it the architect token."
+      }
+    },
+    "botRules": {
+      "intro": "Differences between the automa gameplay and a human player:",
+      "noGold": "The automa never has or gains any gold.",
+      "noActions": "The automa does not perform any actions in the action phase.",
+      "onlyWarTrack": "The automa only promotes on the war track and the VP track but on no other tracks.",
+      "noVP": "The automa does not gain or lose any VP other than from the war phase."
+    }
+  },
   "difficultyLevel": {
     "1": "Normal",
     "2": "Hard"
