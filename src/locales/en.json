@@ -8,6 +8,12 @@
   },
   "setup": {
     "title": "Setup Game",
+    "startPlayer": {
+      "title": "Start Player",
+      "random": "Random",
+      "player": "Player",
+      "bot": "Automa"
+    },
     "difficultyLevel": {
       "title": "Difficulty Level",
       "easy": "Easy",

@@ -1,6 +1,7 @@
 <template>
   <h1>{{t('setup.title')}}</h1>
 
+  <StartPlayer/>
   <DifficultyLevel/>
 
   <button class="btn btn-primary btn-lg mt-4" @click="setupBot()">
@@ -16,11 +17,13 @@ import { useI18n } from 'vue-i18n'
 import { useStateStore } from '@/store/state'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import DifficultyLevel from '@/components/setup/DifficultyLevel.vue'
+import StartPlayer from '@/components/setup/StartPlayer.vue'
 
 export default defineComponent({
   name: 'SetupGame',
   components: {
     FooterButtons,
+    StartPlayer,
     DifficultyLevel
   },
   setup() {
