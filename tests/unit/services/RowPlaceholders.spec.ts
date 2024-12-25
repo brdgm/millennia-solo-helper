@@ -15,7 +15,7 @@ describe('services/RowPlaceholders', () => {
     expect(persistence.rows.length).to.eq(2)
   })
 
-  it('fromPersistence', () => {
+  it('prepareForNextRound', () => {
     const rowPlaceholders = RowPlaceholders.fromPersistence({rows: [1, 3]})
     expect(rowPlaceholders.rows).to.eql([1, 3])
 

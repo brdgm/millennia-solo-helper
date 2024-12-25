@@ -6,11 +6,11 @@ import getTechDuration from '@/util/getTechDuration'
 describe('util/getTechDuration', () => {
   it('getTechDuration', () => {
     for (const tech of getAllEnumValues(Tech)) {
-      for (let age = 1; age<=8; age++) {
-        const duration = getTechDuration(tech, age)
+      for (let round = 1; round<=8; round++) {
+        const duration = getTechDuration(tech, round)
         expect(duration).to.greaterThanOrEqual(1)
         expect(duration).to.lessThanOrEqual(3)
-        expect(age + duration - 1).to.lessThanOrEqual(8)
+        expect(round + duration - 1).to.lessThanOrEqual(8)
       }
     }
   })

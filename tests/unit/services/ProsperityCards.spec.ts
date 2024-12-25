@@ -16,7 +16,7 @@ describe('services/ProsperityCards', () => {
     expect(persistence.discard.length).to.eq(0)
   })
 
-  it('fromPersistence', () => {
+  it('prepareForNextRound', () => {
     const botCards = ProsperityCards.fromPersistence({
       pile: [
         Tech.COMMUNICATION, Tech.ECONOMICS,

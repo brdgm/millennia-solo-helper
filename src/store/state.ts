@@ -3,6 +3,7 @@ import { name } from '@/../package.json'
 import DifficultyLevel from '@/services/enum/DifficultyLevel'
 import Player from '@/services/enum/Player'
 import Tech from '@/services/enum/Tech'
+import TechPlaceholder from '@/services/enum/TechPlaceholder'
 
 export const useStateStore = defineStore(`${name}.state`, {
   state: () => {
@@ -89,4 +90,7 @@ export interface ProsperityCardsPersistence {
 }
 export interface RowPlaceholdersPersistence {
   rows: number[]
+}
+export interface TechCardSelectionPersistence {
+  techs: (Tech|TechPlaceholder)[][]
 }
