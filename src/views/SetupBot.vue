@@ -85,7 +85,7 @@ export default defineComponent({
         constructionTurns: []
       }
       this.state.storeRound(round)
-      this.$router.push('/round/1/start')
+      this.$router.push('/round/1/drafting')
     }
   }
 })

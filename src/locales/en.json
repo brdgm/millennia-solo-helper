@@ -44,9 +44,46 @@
       "noVP": "The automa does not gain or lose any VP other than from the war phase."
     }
   },
+  "phaseADrafting": {
+    "title": "A: Drafting"
+  },
+  "phaseBProsperity": {
+    "title": "B: Prosperity"
+  },
+  "phaseCIncome": {
+    "title": "C: Income"
+  },
+  "phaseDConstruction": {
+    "title": "D: Construction"
+  },
+  "phaseEActions": {
+    "title": "E: Actions"
+  },
+  "phaseFWar": {
+    "title": "F: War"
+  },
+  "phaseGUpkeep": {
+    "title": "G: Upkeep"
+  },
+  "endOfGame": {
+    "title": "End Of Game"
+  },
+  "sideBar": {
+    "round": "Age {round}"
+  },
   "difficultyLevel": {
     "1": "Normal",
     "2": "Hard"
+  },
+  "age": {
+    "1": "Bronze age",
+    "2": "Iron age",
+    "3": "Medieval age",
+    "4": "Early modern age",
+    "5": "Industrial revolution age",
+    "6": "Late modern age",
+    "7": "Contemporary age",
+    "8": "Future age"
   },
   "notfound": {
     "title": "Not Found"
