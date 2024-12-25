@@ -6,7 +6,7 @@
       <label for="difficultyLevel" class="form-label">{{t('setup.difficultyLevel.easy')}}</label>
     </div>
     <div class="col-6 col-sm-8 col-md-5">
-      <input type="range" class="form-range" min="1" max="5" id="difficultyLevel"
+      <input type="range" class="form-range" min="1" max="2" id="difficultyLevel"
           :value="difficultyLevel" @input="updateDifficultyLevel($event)">
     </div>
     <div class="col-3 col-sm-2 col-md-1">

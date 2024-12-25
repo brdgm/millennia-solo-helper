@@ -2,8 +2,8 @@
   "gameTitle": "Millennia",
   "home": {
     "title": "Millennia Solo Helper",
-    "play1": "TBD",
-    "play2": "TBD",
+    "play1": "Play Millennia against Automa, the solo opponent.",
+    "play2": "This application replaces the Automa cards, and guides you through the game flow.",
     "feedback": "Discussion and Feedback:"
   },
   "setup": {
@@ -13,6 +13,10 @@
       "easy": "Easy",
       "hard": "Hard"
     }
+  },
+  "difficultyLevel": {
+    "1": "Normal",
+    "2": "Hard"
   },
   "notfound": {
     "title": "Not Found"
