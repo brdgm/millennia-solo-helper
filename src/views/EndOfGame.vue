@@ -8,7 +8,6 @@
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
-import { useRoute } from 'vue-router'
 import { useStateStore } from '@/store/state'
 
 export default defineComponent({
@@ -18,7 +17,6 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
-    const route = useRoute()
     const state = useStateStore()
 
     return { t, state }
