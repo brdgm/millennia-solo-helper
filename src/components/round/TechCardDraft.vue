@@ -4,7 +4,11 @@
       <template v-for="(tech,col) in techs" :key="col">
         <div v-if="isEmpty(tech)" class="techCard empty"></div>
         <div v-else-if="isBlank(tech)" class="techCard blank"></div>
-        <div v-else class="techCard tech" :style="{backgroundColor:getColor(tech)}">
+        <div v-else class="techCard tech"
+            :data-tech="tech"
+            :class="{disabled:hasTwoEmpty(techs)}"
+            :style="{backgroundColor:getColor(tech)}" 
+            @click="hasTwoEmpty(techs) ? () => {} : remove(tech)">
           <AppIcon type="tech" :name="tech" class="icon"/>
           <div class="prosperity" v-if="isProsperity(tech)">
             <AppIcon name="prosperity" class="icon"/>
@@ -58,6 +62,11 @@ export default defineComponent({
       required: true
     }
   },
+  data() {
+    return {
+      removeAnimation: false
+    }
+  },
   computed: {
     techCardSelection() : TechCardSelection {
       return this.navigationState.techCardSelection
@@ -99,6 +108,20 @@ export default defineComponent({
         return ''
       }
       return getTechColor(tech)
+    },
+    hasTwoEmpty(techs: (Tech|TechPlaceholder)[]) : boolean {
+      return techs.filter(tech => tech == TechPlaceholder.EMPTY).length >= 2
+    },
+    remove(tech: (Tech|TechPlaceholder)) {
+      if (this.removeAnimation || tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
+        return
+      }
+      document.querySelector(`.techCard[data-tech="${tech}"]`)?.classList.add('remove')
+      this.removeAnimation = true
+      setTimeout(() => {
+        this.removeAnimation = false
+        this.navigationState.techCardSelection.remove(tech)
+      }, 400)
     }
   }
 })
@@ -117,13 +140,24 @@ export default defineComponent({
   display: inline-block;
   width: 80px;
   height: 120px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   &.tech {
-    margin-right: 10px;
-    margin-bottom: 10px;
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
     filter: drop-shadow(2px 2px 2px #888);
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    &.disabled {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.3;
+    }
+    &.remove {
+      transform: rotateY(180deg);
+    }
   }
   > .icon {
     width: 75px;
