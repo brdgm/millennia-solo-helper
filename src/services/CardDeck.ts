@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import Card from './Card'
 
 /**
- * Manages the solo card decks.
+ * Manages the Automa cards.
  */
 export default class CardDeck<T extends Card> {
 
@@ -66,10 +66,9 @@ export default class CardDeck<T extends Card> {
 
   /**
    * Creates a shuffled new card deck.
-   * @param difficultyLevel DifficultyLevel
    */
-  public static new<T extends Card>(getAll : () => T[]) : CardDeck<T> {
-    const cards = shuffle(getAll())
+  public static new<T extends Card>(allCards : T[]) : CardDeck<T> {
+    const cards = shuffle(allCards)
     return new CardDeck<T>(cards, [])
   }
 

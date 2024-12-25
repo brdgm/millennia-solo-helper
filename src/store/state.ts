@@ -22,13 +22,21 @@ export const useStateStore = defineStore(`${name}.state`, {
       this.rounds = this.rounds.filter(item => item.round < round.round)
       this.rounds.push(round)
     },
-    storeTurn(turn : Turn) {
+    storeDraftingTurn(turn : DraftingTurn) {
       const round = this.rounds.find(item => item.round == turn.round)
       if (!round) {
         throw new Error(`Round ${turn.round} not found.`)
       }
-      round.turns = round.turns.filter(item => (item.turn < turn.turn))
-      round.turns.push(turn)
+      round.draftingTurns = round.draftingTurns.filter(item => (item.turn < turn.turn))
+      round.draftingTurns.push(turn)
+    },
+    storeConstructionTurn(turn : ConstructionTurn) {
+      const round = this.rounds.find(item => item.round == turn.round)
+      if (!round) {
+        throw new Error(`Round ${turn.round} not found.`)
+      }
+      round.constructionTurns = round.constructionTurns.filter(item => (item.turn < turn.turn))
+      round.constructionTurns.push(turn)
     }
   },
   persist: true
@@ -43,25 +51,30 @@ export interface State {
 export interface Setup {
   difficultyLevel: DifficultyLevel
   startPlayer?: Player
-  initialStartPlayer?: Player
-  initialBotPersistence?: BotPersistence
   debugMode?: boolean
 }
 
 export interface Round {
   round: number
-  turns: Turn[]
+  startPlayer: Player
+  botCards: BotCardsPersistence
+  draftingTurns: DraftingTurn[]
+  constructionTurns: ConstructionTurn[]
 }
-export interface Turn {
+export interface DraftingTurn {
+  round: number
+  turn: number
+}
+export interface ConstructionTurn {
   round: number
   turn: number
 }
 
-export interface BotPersistence {
-  draftingRowCards: CardDeckPersistence
-  draftingPriorityCards: CardDeckPersistence
-  constructionCards: CardDeckPersistence
-  warCards: CardDeckPersistence
+export interface BotCardsPersistence {
+  draftingRow: CardDeckPersistence
+  draftingPriority: CardDeckPersistence
+  construction: CardDeckPersistence
+  war: CardDeckPersistence
 }
 export interface CardDeckPersistence {
   pile: number[]

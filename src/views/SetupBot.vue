@@ -39,7 +39,9 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useStateStore, Round } from '@/store/state'
-import Player from '@/services/enum/Player';
+import Player from '@/services/enum/Player'
+import BotCards from '@/services/BotCards'
+import randomEnum from '@brdgm/brdgm-commons/src/util/random/randomEnum'
 
 export default defineComponent({
   name: 'SetupBot',
@@ -49,12 +51,16 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const state = useStateStore()
-    return { t, state }
+
+    // determine start player
+    let startPlayer = state.setup.startPlayer
+    if (startPlayer === undefined) {
+      startPlayer = randomEnum(Player)
+    }
+
+    return { t, state, startPlayer }
   },
   computed: {
-    startPlayer() : Player {
-      return this.state.setup.initialStartPlayer ?? Player.PLAYER
-    },
     secondPlayer() : Player {
       if (this.startPlayer === Player.PLAYER) {
         return Player.BOT
@@ -68,7 +74,10 @@ export default defineComponent({
     startGame() : void {
       const round : Round = {
         round: 1,
-        turns: []
+        startPlayer: this.startPlayer,
+        botCards: BotCards.new(this.state.setup.difficultyLevel).toPersistence(),
+        draftingTurns: [],
+        constructionTurns: []
       }
       this.state.storeRound(round)
       this.$router.push('/round/1/start')
