@@ -87,3 +87,6 @@ export interface ProsperityCardsPersistence {
   current: Tech[][]
   discard: Tech[]
 }
+export interface RowPlaceholdersPersistence {
+  rows: number[]
+}
