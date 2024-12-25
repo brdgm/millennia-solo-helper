@@ -3,6 +3,8 @@
 
   <h1 class="mb-3">{{t('phaseADrafting.title')}}</h1>
 
+  <TechCardDraft :navigationState="navigationState"/>
+
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
   </button>
@@ -16,14 +18,16 @@ import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
 import { useStateStore } from '@/store/state'
-import SideBar from '@/components/structure/SideBar.vue'
+import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
+import TechCardDraft from '@/components/round/TechCardDraft.vue'
 
 export default defineComponent({
   name: 'PhaseADrafting',
   components: {
     FooterButtons,
-    SideBar
+    SideBar,
+    TechCardDraft
   },
   setup() {
     const { t } = useI18n()

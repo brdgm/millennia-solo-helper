@@ -3,8 +3,8 @@ import Tech from '@/services/enum/Tech'
 /**
  * Get tech card duration for given age.
  * @param tech Tech card
- * @param age Age
- * @returns Age duration
+ * @param round Age
+ * @returns Tech duration
  */
 export default function(tech: Tech, round: number) : number {
   const index = round - 1

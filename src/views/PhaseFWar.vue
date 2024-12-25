@@ -16,7 +16,7 @@ import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
 import { useStateStore } from '@/store/state'
-import SideBar from '@/components/structure/SideBar.vue'
+import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 
 export default defineComponent({
