@@ -64,7 +64,7 @@ export default class TechCardSelection {
 
   private findMatchingIndexes(techs: (Tech|TechPlaceholder)[], priority: (Tech|TechMatch), prosperityTechs: Tech[]) : number[] {
     const onlyTechs = this.getOnlyTechs(techs)
-    const maxAge = onlyTechs.map(tech => getTechDuration(tech, this._round)).reduce((a,b) => Math.max(a,b))
+    const maxAge = onlyTechs.map(tech => getTechDuration(tech, this._round)).reduce((a,b) => Math.max(a,b), 0)
     let matchingTechs
     if (priority == TechMatch.MAX_AGE) {
       matchingTechs = onlyTechs.filter(tech => getTechDuration(tech, this._round) == maxAge)
