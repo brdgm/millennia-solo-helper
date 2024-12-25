@@ -1,4 +1,5 @@
 import DifficultyLevel from '@/services/enum/DifficultyLevel'
+import Player from '@/services/enum/Player'
 import { Round, State } from '@/store/state'
 
 export default function (params?: MockStateParams) : State {  
@@ -6,7 +7,8 @@ export default function (params?: MockStateParams) : State {
     language: 'en',
     baseFontSize: 1,
     setup: {
-      difficultyLevel: params?.difficultyLevel ?? DifficultyLevel.BEGINNER
+      difficultyLevel: params?.difficultyLevel ?? DifficultyLevel.NORMAL,
+      startPlayer: params?.startPlayer
     },
     rounds: params?.rounds ?? []
   }
@@ -14,5 +16,6 @@ export default function (params?: MockStateParams) : State {
 
 export interface MockStateParams {
   difficultyLevel?: DifficultyLevel,
+  startPlayer?: Player,
   rounds?: Round[]
 }

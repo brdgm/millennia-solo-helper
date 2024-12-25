@@ -91,7 +91,7 @@ export default class TechCardSelection {
   /**
    * Creates a selection of techs in 4 ros respecting the placeholder rows.
    */
-  public static new(placeholderRows: number[], round: number) : TechCardSelection {
+  public static new(placeholderRows: readonly number[], round: number) : TechCardSelection {
     const allTechs = shuffle(getAllEnumValues(Tech))
     const techs : (Tech|TechPlaceholder)[][] = []
     for (let row = 1; row <= 4; row++) {

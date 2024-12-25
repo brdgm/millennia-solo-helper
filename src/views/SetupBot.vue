@@ -46,6 +46,8 @@ import Player from '@/services/enum/Player'
 import BotCards from '@/services/BotCards'
 import randomEnum from '@brdgm/brdgm-commons/src/util/random/randomEnum'
 import ProsperityCards from '@/services/ProsperityCards'
+import RowPlaceholders from '@/services/RowPlaceholders'
+import TechCardSelection from '@/services/TechCardSelection'
 
 export default defineComponent({
   name: 'SetupBot',
@@ -76,13 +78,15 @@ export default defineComponent({
   },
   methods: {
     startGame() : void {
+      const rowPlaceholders = RowPlaceholders.new()
       const round : Round = {
         round: 1,
         startPlayer: this.startPlayer,
+        architectPlayer: this.secondPlayer,
         prosperityCards: ProsperityCards.new().toPersistence(),
         botCards: BotCards.new(this.state.setup.difficultyLevel).toPersistence(),
-        draftingTurns: [],
-        constructionTurns: []
+        rowPlaceholders: rowPlaceholders.toPersistence(),
+        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, 1).toPersistence()
       }
       this.state.storeRound(round)
       this.$router.push('/round/1/drafting')
