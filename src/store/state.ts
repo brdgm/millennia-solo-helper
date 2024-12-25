@@ -70,4 +70,5 @@ export interface RowPlaceholdersPersistence {
 }
 export interface TechCardSelectionPersistence {
   techs: (Tech|TechPlaceholder)[][]
+  removedTechs: (Tech|TechPlaceholder)[]
 }

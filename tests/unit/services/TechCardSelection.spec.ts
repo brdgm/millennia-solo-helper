@@ -17,20 +17,24 @@ describe('services/TechCardSelection', () => {
     expect(persistence.techs.flat().length).to.eq(16)
   })
 
-  it('remove', () => {
+  it('remove-reset', () => {
     const techCardSelection = TechCardSelection.fromPersistence({
       techs: [
         [Tech.COMMUNICATION, Tech.ECONOMICS, Tech.ENERGY, Tech.ENGINEERING],
         [Tech.GOVERNMENT, Tech.MEDICINE, Tech.SCIENCE, TechPlaceholder.BLANK],
         [Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK],
         [Tech.ARMY, Tech.MILITARY, Tech.WEAPONRY, Tech.AGRICULTURE]
-      ]
+      ], removedTechs: []
     }, 1)
     expect(techCardSelection.techs.flat().length).to.eq(16)
 
     techCardSelection.remove(Tech.TRANSPORTATION)
     expect(techCardSelection.techs.flat().length).to.eq(16)
     expect(techCardSelection.techs[2]).to.eql([Tech.SOCIAL_SCIENCE, TechPlaceholder.EMPTY, Tech.ARTS, TechPlaceholder.BLANK])
+
+    techCardSelection.reset()
+    expect(techCardSelection.techs.flat().length).to.eq(16)
+    expect(techCardSelection.techs[2]).to.eql([Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK])
   })
 
   it('determineTech', () => {
@@ -40,7 +44,7 @@ describe('services/TechCardSelection', () => {
         [Tech.GOVERNMENT, Tech.MEDICINE, Tech.SCIENCE, TechPlaceholder.BLANK],
         [Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK],
         [Tech.ARMY, Tech.MILITARY, Tech.AGRICULTURE, Tech.COMMUNICATION]
-      ]
+      ], removedTechs: []
     }, 2)
     const prosperityTechs = [Tech.ECONOMICS, Tech.MEDICINE, Tech.SCIENCE, Tech.TRANSPORTATION]
 

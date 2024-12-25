@@ -8,6 +8,9 @@
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
   </button>
+  <button class="btn btn-outline-secondary btn-sm mt-4 ms-3" @click="navigationState.techCardSelection.reset()">
+    {{t('action.reset')}}
+  </button>
 
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>

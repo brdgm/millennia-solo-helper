@@ -16,14 +16,16 @@ export default class TechCardSelection {
 
   private readonly _techs
   private readonly _round : number
+  private readonly _removedTechs
 
-  private constructor(techs: (Tech|TechPlaceholder)[][], round: number) {
+  private constructor(techs: (Tech|TechPlaceholder)[][], removedTechs: (Tech|TechPlaceholder)[], round: number) {
     this._techs = ref(techs)
     this._round = round
+    this._removedTechs = ref(removedTechs)
   }
 
   public get techs() : readonly (Tech|TechPlaceholder)[][] {
-    return this._techs.value
+    return this._techs.value.map(techs => techs.map(tech => this._removedTechs.value.includes(tech) ? TechPlaceholder.EMPTY : tech))
   }
 
   /**
@@ -31,7 +33,8 @@ export default class TechCardSelection {
    */
   public toPersistence() : TechCardSelectionPersistence {
     return {
-      techs: this._techs.value
+      techs: this._techs.value,
+      removedTechs: this._removedTechs.value
     }
   }
 
@@ -83,9 +86,14 @@ export default class TechCardSelection {
    * @param tech Tech card.
    */
   public remove(tech: Tech) : void {
-    this._techs.value.forEach((row,index) => {
-      this._techs.value[index] = row.map(item => item == tech ? TechPlaceholder.EMPTY : item)
-    })
+    this._removedTechs.value.push(tech)
+  }
+
+  /**
+   * Resets the removed tech cards.
+   */
+  public reset() : void {
+    this._removedTechs.value = []
   }
 
   /**
@@ -102,14 +110,18 @@ export default class TechCardSelection {
         techs.push(allTechs.splice(0, 4))
       }
     }
-    return new TechCardSelection(techs, round)
+    return new TechCardSelection(techs, [], round)
   }
 
   /**
    * Re-creates from persistence.
    */
   public static fromPersistence(persistence : TechCardSelectionPersistence, round: number) : TechCardSelection {
-    return new TechCardSelection(cloneDeep(persistence.techs), round)
+    return new TechCardSelection(
+      cloneDeep(persistence.techs),
+      cloneDeep(persistence.removedTechs),
+      round
+    )
   }
 
 }
