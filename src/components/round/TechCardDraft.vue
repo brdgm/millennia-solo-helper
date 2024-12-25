@@ -6,6 +6,9 @@
         <div v-else-if="isBlank(tech)" class="techCard blank"></div>
         <div v-else class="techCard tech" :style="{backgroundColor:getColor(tech)}">
           <AppIcon type="tech" :name="tech" class="icon"/>
+          <div class="prosperity" v-if="isProsperity(tech)">
+            <AppIcon name="prosperity" class="icon"/>
+          </div>
           <div class="marker" v-if="isArmy(tech)">
             <AppIcon name="first-player-token" class="icon"/>
           </div>
@@ -79,6 +82,12 @@ export default defineComponent({
     isCommunication(tech: (Tech|TechPlaceholder)) : boolean {
       return tech == Tech.COMMUNICATION
     },
+    isProsperity(tech: (Tech|TechPlaceholder)) : boolean {
+      if (tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
+        return false
+      }
+      return this.navigationState.prosperityCards.current.flat().includes(tech)
+    },
     getDuration(tech: (Tech|TechPlaceholder)) : number {
       if (tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
         return 0
@@ -97,7 +106,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .techs {
-  width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -109,15 +117,26 @@ export default defineComponent({
   display: inline-block;
   width: 80px;
   height: 120px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  filter: drop-shadow(2px 2px 2px #888);
+  &.tech {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    filter: drop-shadow(2px 2px 2px #888);
+  }
   > .icon {
     width: 75px;
     margin-top: 10px;
+  }
+  .prosperity {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    > .icon {
+      width: 25px;
+      filter: drop-shadow(1px 1px 1px #444);
+    }
   }
   .marker {
     position: absolute;
@@ -126,6 +145,7 @@ export default defineComponent({
     > .icon {
       max-width: 35px;
       max-height: 30px;
+      filter: drop-shadow(1px 1px 1px #444);
     }
   }
   .durations {
@@ -146,7 +166,7 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       margin-top: -4px;
-      filter: drop-shadow(1px 1px 1px #000);
+      filter: drop-shadow(1px 1px 1px #444);
     }
   }
 }
