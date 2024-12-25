@@ -2,7 +2,7 @@
  * Tech placeholder
  */
 enum TechPlaceholder {
-  PLACEHOLDER = 'placeholder',
+  BLANK = 'blank',
   EMPTY = 'empty'
 }
 export default TechPlaceholder

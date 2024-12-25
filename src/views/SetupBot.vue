@@ -6,6 +6,9 @@
   <div class="instructions mt-3">
     <ul>
       <li v-html="t('setupBot.setup.gameBoard')"></li>
+      <ul>
+        <li v-html="t('setupBot.setup.techCards')"></li>
+      </ul>
       <li v-html="t('setupBot.setup.playerColor')"></li>
       <li v-html="t('setupBot.setup.trackTokens')"></li>
       <li v-html="t(`setupBot.setup.startPlayer.${startPlayer}`)"></li>

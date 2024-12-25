@@ -59,7 +59,7 @@ export default class TechCardSelection {
   }
   
   private getOnlyTechs(techs: (Tech|TechPlaceholder)[]) : Tech[] {
-    return techs.filter(tech => tech != TechPlaceholder.PLACEHOLDER && tech != TechPlaceholder.EMPTY) as Tech[]
+    return techs.filter(tech => tech != TechPlaceholder.BLANK && tech != TechPlaceholder.EMPTY) as Tech[]
   }
 
   private findMatchingIndexes(techs: (Tech|TechPlaceholder)[], priority: (Tech|TechMatch), prosperityTechs: Tech[]) : number[] {
@@ -96,7 +96,7 @@ export default class TechCardSelection {
     const techs : (Tech|TechPlaceholder)[][] = []
     for (let row = 1; row <= 4; row++) {
       if (placeholderRows.includes(row)) {
-        techs.push([...allTechs.splice(0, 3), TechPlaceholder.PLACEHOLDER])
+        techs.push([...allTechs.splice(0, 3), TechPlaceholder.BLANK])
       }
       else {
         techs.push(allTechs.splice(0, 4))

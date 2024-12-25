@@ -24,6 +24,7 @@
     "title": "Setup Automa",
     "setup": {
       "gameBoard": "Setup the game the same way as a 2-player game.",
+      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against Automa.",
       "playerColor": "Choose a player color for the automa. The automa only needs 2 track tokens.",
       "trackTokens": "Place the automa track tokens on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
       "startPlayer": {
