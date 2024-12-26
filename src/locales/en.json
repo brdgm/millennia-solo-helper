@@ -45,7 +45,9 @@
     }
   },
   "phaseADrafting": {
-    "title": "A: Drafting"
+    "title": "A: Drafting",
+    "playerTurnSelect": "Please place your drafting marker on the board and select a tech card, or click on <i>Next</i> if you selected a special action.",
+    "playerDraft": "Player draft"
   },
   "phaseBProsperity": {
     "title": "B: Prosperity"

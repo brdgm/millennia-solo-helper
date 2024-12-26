@@ -14,12 +14,12 @@
 
     <div class="mt-2" v-if="botStartPlayer || botArchitectPlayer">
       <span class="fw-bold">{{t('player.bot')}}</span><br/>
-      <AppIcon v-if="botStartPlayer" name="first-player-token" class="marker"/>
+      <AppIcon v-if="botStartPlayer" name="first-player-token" class="marker me-1"/>
       <AppIcon v-if="botArchitectPlayer" name="architect-token" class="marker"/>
     </div>
     <div class="mt-2" v-if="playerStartPlayer || playerArchitectPlayer">
       <span class="fw-bold">{{t('player.player')}}</span><br/>
-      <AppIcon v-if="playerStartPlayer" name="first-player-token" class="marker"/>
+      <AppIcon v-if="playerStartPlayer" name="first-player-token" class="marker me-1"/>
       <AppIcon v-if="playerArchitectPlayer" name="architect-token" class="marker"/>
     </div>
   </div>
