@@ -3,7 +3,7 @@
 
   <h1 class="mb-3">{{t('phaseADrafting.title')}}</h1>
 
-  <TechCardDraft :navigationState="navigationState"/>
+  <TechCardDraft :navigationState="navigationState" ref="techCardDraft"/>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
@@ -36,11 +36,12 @@ export default defineComponent({
     const { t } = useI18n()
     const route = useRoute()
     const state = useStateStore()
+    const techCardDraft = ref()
 
     const navigationState = new NavigationState(route, state)
     const { round } = navigationState
 
-    return { t, state, navigationState, round }
+    return { t, state, navigationState, round, techCardDraft }
   },
   computed: {
     backButtonRouteTo() : string {
@@ -61,6 +62,7 @@ export default defineComponent({
       this.navigationState.techCardSelection.reset()
       this.roundData.nextStartPlayer = undefined
       this.roundData.nextArchitectPlayer = undefined
+      this.techCardDraft.reset()
     }
   }
 })

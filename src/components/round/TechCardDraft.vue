@@ -46,6 +46,7 @@ import AppIcon from '../structure/AppIcon.vue'
 import getTechDuration from '@/util/getTechDuration'
 import getTechColor from '@/util/getTechColor'
 import toTech from '@/util/toTech'
+import Player from '@/services/enum/Player'
 
 export default defineComponent({
   name: 'TechCardDraft',
@@ -65,7 +66,10 @@ export default defineComponent({
   },
   data() {
     return {
-      removeAnimation: false
+      removeAnimation: false,
+      botTechs: [] as Tech[],
+      playerTechs: [] as Tech[],
+      playerSpecialActions: 0
     }
   },
   computed: {
@@ -107,7 +111,7 @@ export default defineComponent({
     hasTwoEmpty(techs: (Tech|TechPlaceholder)[]) : boolean {
       return techs.filter(tech => tech == TechPlaceholder.EMPTY).length >= 2
     },
-    remove(tech: (Tech|TechPlaceholder)) {
+    remove(tech: (Tech|TechPlaceholder)) : void {
       const t = toTech(tech)
       if (this.removeAnimation || !t) {
         return
@@ -118,7 +122,41 @@ export default defineComponent({
         this.removeAnimation = false
         this.navigationState.techCardSelection.remove(t)
       }, 400)
+    },
+    nextTurn() : void {
+      if (this.botTechs.length < this.playerTechs.length) {
+        this.nextTurnBot()
+      }
+      else if (this.playerTechs.length < this.botTechs.length) {
+        this.nextTurnPlayer()
+      }
+      else if (this.navigationState.startPlayer == Player.BOT) {
+        this.nextTurnBot()
+      }
+      else {
+        this.nextTurnPlayer()
+      }
+    },
+    nextTurnBot() : void {
+      const { techCardSelection, botCards, prosperityCards } = this.navigationState
+      const draftingRowCard = botCards.draftingRow.draw()
+      const draftingPriorityCard = botCards.draftingPriority.draw()
+      const tech = techCardSelection.determineTech(draftingRowCard, draftingPriorityCard, prosperityCards.current.flat())
+      this.remove(tech)
+    },
+    nextTurnPlayer() : void {
+      alert('Player turn')
+    },
+    reset() : void {
+      alert('Player turn')
+      this.botTechs = []
+      this.playerTechs = []
+      this.playerSpecialActions = 0
+      this.nextTurn()
     }
+  },
+  mounted() {
+    this.nextTurn()
   }
 })
 </script>

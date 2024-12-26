@@ -57,14 +57,14 @@ export default defineComponent({
     round() : number {
       return this.navigationState.round
     },
-    roundData() : Round {
-      return this.state.rounds.find(item => item.round == this.round)!
+    roundData() : Round|undefined {
+      return this.state.rounds.find(item => item.round == this.round)
     },
     nextStartPlayer() : Player {
-      return this.roundData.nextStartPlayer ?? this.navigationState.startPlayer
+      return this.roundData?.nextStartPlayer ?? this.navigationState.startPlayer
     },
     nextArchitectPlayer() : Player {
-      return this.roundData.nextArchitectPlayer ?? this.navigationState.architectPlayer
+      return this.roundData?.nextArchitectPlayer ?? this.navigationState.architectPlayer
     },
     botStartPlayer() : boolean {
       return this.nextStartPlayer == Player.BOT
