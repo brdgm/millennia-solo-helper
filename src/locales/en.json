@@ -47,25 +47,30 @@
   "phaseADrafting": {
     "title": "A: Drafting",
     "playerTurnSelect": "Please place your drafting marker on the board and select a tech card, or click on <i>Next</i> if you selected a special action.",
-    "playerDraft": "Player draft"
+    "playerDraft": "Player draft",
+    "botDraft": "Automa draft"
   },
   "phaseBProsperity": {
-    "title": "B: Prosperity"
+    "title": "B: Prosperity",
+    "skip": "Automa skips this phase."
   },
   "phaseCIncome": {
-    "title": "C: Income"
+    "title": "C: Income",
+    "skip": "Automa skips this phase."
   },
   "phaseDConstruction": {
     "title": "D: Construction"
   },
   "phaseEActions": {
-    "title": "E: Actions"
+    "title": "E: Actions",
+    "skip": "Automa skips this phase."
   },
   "phaseFWar": {
     "title": "F: War"
   },
   "phaseGUpkeep": {
-    "title": "G: Upkeep"
+    "title": "G: Upkeep",
+    "skip": "Automa skips this phase."
   },
   "endOfGame": {
     "title": "End Of Game"

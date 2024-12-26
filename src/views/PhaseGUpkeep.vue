@@ -3,6 +3,8 @@
 
   <h1 class="mb-3">{{t('phaseGUpkeep.title')}}</h1>
 
+  <p class="mt-4" v-html="t('phaseGUpkeep.skip')"></p>
+
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
   </button>

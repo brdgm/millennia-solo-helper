@@ -35,6 +35,15 @@
     </div>
   </div>
 
+  <div v-if="botTechs.length > 0" class="mt-3">
+    <h5>{{t('phaseADrafting.botDraft')}}</h5>
+    <div class="techs">
+      <div class="techRow">
+        <TechCard v-for="tech of botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script lang="ts">
