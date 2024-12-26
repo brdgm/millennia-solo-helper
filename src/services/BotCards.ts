@@ -29,12 +29,13 @@ export default class BotCards {
   }
 
   /**
-   * Reshuffle all decks except the war deck.
+   * Reshuffle all decks except the war deck. Draw a new card from the war deck.
    */
   public prepareForNextRound() : void {
     this.draftingRow.shuffle()
     this.draftingPriority.shuffle()
     this.construction.shuffle()
+    this.war.draw()
   }
 
   /**
@@ -58,10 +59,11 @@ export default class BotCards {
     const draftingPriority = CardDeck.new(DraftingPriorityCards.getAll())
     const construction = CardDeck.new(ConstructionCards.getAll())
 
-    // prepare war deck based on difficulty level
+    // prepare war deck based on difficulty level and draw first card
     const warCards = WarCards.getAll()
       .filter(card => difficultyLevel == DifficultyLevel.HARD || card.warAdvance < 5)
     const war = CardDeck.new(warCards)
+    war.draw()
 
     return new BotCards(draftingRow, draftingPriority, construction, war)
   }

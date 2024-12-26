@@ -66,7 +66,11 @@
     "skip": "Automa skips this phase."
   },
   "phaseFWar": {
-    "title": "F: War"
+    "title": "F: War",
+    "advance": "Automa advances {steps} steps on the war track.",
+    "outmax": "If the automa maxes out the war track, it gains 1 VP per step beyond 7.",
+    "resolve": "Then the war phase is resolved normally.",
+    "trackVP": "Track the VP the automa during the war phase on the VP track. "
   },
   "phaseGUpkeep": {
     "title": "G: Upkeep",
