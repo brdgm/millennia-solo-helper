@@ -6,9 +6,9 @@
         <div v-else-if="isBlank(tech)" class="techCard blank"></div>
         <div v-else class="techCard tech"
             :data-tech="tech"
-            :class="{disabled:hasTwoEmpty(techs)}"
+            :class="{disabled:hasTwoEmpty(techs) || draftingCompleted}"
             :style="{backgroundColor:getColor(tech)}" 
-            @click="hasTwoEmpty(techs) ? () => {} : remove(tech)">
+            @click="hasTwoEmpty(techs) || draftingCompleted ? () => {} : playerDraftTech(tech)">
           <AppIcon type="tech" :name="tech" class="icon"/>
           <div class="prosperity" v-if="isProsperity(tech)">
             <AppIcon name="prosperity" class="icon"/>
@@ -32,12 +32,59 @@
       </template>
     </div>
   </div>
+
+  <button class="btn btn-primary btn-lg mt-4 me-3" @click="next()">
+    {{t('action.next')}}
+  </button>
+  <button class="btn btn-outline-secondary btn-sm mt-4" @click="reset()">
+    {{t('action.reset')}}
+  </button>
+
+  <div class="row" v-if="playerTurn || draftingCompleted">
+    <div class="col">
+      <div class="alert alert-primary mt-3" v-if="playerTurn">
+        Please place your drafting marker on the board and select a tech card, or click on "Next" if you selected a special action.
+      </div>
+      <div class="alert alert-primary mt-3" v-if="draftingCompleted">
+        Drafting completed.
+      </div>
+    </div>
+  </div>
+
+  <h5>Player techs</h5>
+  <div class="techs">
+    <div class="techRow">
+      <div v-for="tech of playerTechs" class="techCard tech"
+          :style="{backgroundColor:getColor(tech)}">
+        <AppIcon type="tech" :name="tech" class="icon"/>
+        <div class="prosperity" v-if="isProsperity(tech)">
+          <AppIcon name="prosperity" class="icon"/>
+        </div>
+        <div class="marker" v-if="isArmy(tech)">
+          <AppIcon name="first-player-token" class="icon"/>
+        </div>
+        <div class="marker" v-if="isEngineering(tech)">
+          <AppIcon name="architect-token" class="icon"/>
+        </div>
+        <div class="marker" v-if="isEnergy(tech)">
+          <AppIcon name="unlock-income" class="icon"/>
+        </div>
+        <div class="marker" v-if="isCommunication(tech)">
+          <AppIcon name="prosperity-money" class="icon"/>
+        </div>
+        <div class="durations">
+          <div class="duration" v-for="age of getDuration(tech)" :key="age" :style="{'z-index':100-age}"><div>{{age}}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useStateStore } from '@/store/state'
+import { Round, useStateStore } from '@/store/state'
 import NavigationState from '@/util/NavigationState'
 import TechCardSelection from '@/services/TechCardSelection'
 import Tech from '@/services/enum/Tech'
@@ -62,6 +109,10 @@ export default defineComponent({
     navigationState: {
       type: NavigationState,
       required: true
+    },
+    nextButtonRouteTo: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -69,12 +120,25 @@ export default defineComponent({
       removeAnimation: false,
       botTechs: [] as Tech[],
       playerTechs: [] as Tech[],
-      playerSpecialActions: 0
+      playerSpecialActions: 0,
+      playerTurn: false
     }
   },
   computed: {
     techCardSelection() : TechCardSelection {
       return this.navigationState.techCardSelection
+    },
+    botMarkerPlaced() : number {
+      return this.botTechs.length
+    },
+    playerMarkerPlaced() : number {
+      return this.playerTechs.length + this.playerSpecialActions
+    },
+    draftingCompleted() : boolean {
+      return this.botMarkerPlaced == 4 && this.playerMarkerPlaced == 4
+    },
+    roundData() : Round {
+      return this.state.rounds.find(item => item.round == this.navigationState.round)!
     }
   },
   methods: {
@@ -111,52 +175,93 @@ export default defineComponent({
     hasTwoEmpty(techs: (Tech|TechPlaceholder)[]) : boolean {
       return techs.filter(tech => tech == TechPlaceholder.EMPTY).length >= 2
     },
-    remove(tech: (Tech|TechPlaceholder)) : void {
-      const t = toTech(tech)
-      if (this.removeAnimation || !t) {
+    async remove(tech: Tech) {
+      if (this.removeAnimation) {
         return
       }
-      document.querySelector(`.techCard[data-tech="${t}"]`)?.classList.add('remove')
+      document.querySelector(`.techCard[data-tech="${tech}"]`)?.classList.add('remove')
       this.removeAnimation = true
-      setTimeout(() => {
-        this.removeAnimation = false
-        this.navigationState.techCardSelection.remove(t)
-      }, 400)
+      await new Promise(resolve => setTimeout(resolve, 400));
+      this.removeAnimation = false
+      this.navigationState.techCardSelection.remove(tech)
     },
-    nextTurn() : void {
-      if (this.botTechs.length < this.playerTechs.length) {
-        this.nextTurnBot()
+    async nextTurn() {
+      if (this.draftingCompleted) {
+        return
       }
-      else if (this.playerTechs.length < this.botTechs.length) {
-        this.nextTurnPlayer()
+      if (this.botMarkerPlaced < this.playerMarkerPlaced) {
+        await this.nextTurnBot()
+      }
+      else if (this.playerMarkerPlaced < this.botMarkerPlaced) {
+        await this.nextTurnPlayer()
       }
       else if (this.navigationState.startPlayer == Player.BOT) {
-        this.nextTurnBot()
+        await this.nextTurnBot()
       }
       else {
-        this.nextTurnPlayer()
+        await this.nextTurnPlayer()
       }
     },
-    nextTurnBot() : void {
+    async nextTurnBot() {
       const { techCardSelection, botCards, prosperityCards } = this.navigationState
       const draftingRowCard = botCards.draftingRow.draw()
       const draftingPriorityCard = botCards.draftingPriority.draw()
       const tech = techCardSelection.determineTech(draftingRowCard, draftingPriorityCard, prosperityCards.current.flat())
-      this.remove(tech)
+      await this.remove(tech)
+      this.botTechs.push(tech)
+      if (tech == Tech.ARMY) {
+        this.roundData.nextStartPlayer = Player.BOT
+      }
+      if (tech == Tech.ENGINEERING) {
+        this.roundData.nextArchitectPlayer = Player.BOT
+      }
+      await this.nextTurn()
     },
-    nextTurnPlayer() : void {
-      alert('Player turn')
+    async nextTurnPlayer() {
+      this.playerTurn = true
     },
-    reset() : void {
-      alert('Player turn')
+    async playerDraftTech(tech: (Tech|TechPlaceholder)) {
+      const t = toTech(tech)
+      if (!t) {
+        return
+      }
+      this.playerTurn = false
+      await this.remove(t)
+      this.playerTechs.push(t)
+      if (t == Tech.ARMY) {
+        this.roundData.nextStartPlayer = Player.PLAYER
+      }
+      if (t == Tech.ENGINEERING) {
+        this.roundData.nextArchitectPlayer = Player.PLAYER
+      }
+      await this.nextTurn()
+    },
+    async reset() {
+      this.navigationState.techCardSelection.reset()
+      this.navigationState.botCards.draftingRow.reset()
+      this.navigationState.botCards.draftingPriority.reset()
+      this.roundData.nextStartPlayer = undefined
+      this.roundData.nextArchitectPlayer = undefined
+
       this.botTechs = []
       this.playerTechs = []
       this.playerSpecialActions = 0
-      this.nextTurn()
+
+      await this.nextTurn()
+    },
+    async next() {
+      if (this.draftingCompleted) {
+        this.$router.push(this.nextButtonRouteTo)
+      }
+      else {
+        this.playerSpecialActions++
+        this.playerTurn = false
+        await this.nextTurn()
+      }
     }
   },
   mounted() {
-    this.nextTurn()
+    setTimeout(() => this.nextTurn(), 10)
   }
 })
 </script>

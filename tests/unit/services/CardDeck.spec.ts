@@ -60,4 +60,17 @@ describe('services/CardDeck', () => {
     expect(deck.pile.length, 'pile').to.eq(2)
     expect(deck.discard.length, 'discard').to.eq(1)
   })
+
+  it('reset', () => {
+    const deck = CardDeck.fromPersistence({pile: [1,2], discard: []}, WarCards.get)
+
+    let card = deck.draw()
+    expect(card.id, 'card.id').to.eq(1)
+
+    deck.reset()
+
+    card = deck.draw()
+    expect(card.id, 'card.id').to.eq(1)
+  })
+
 })

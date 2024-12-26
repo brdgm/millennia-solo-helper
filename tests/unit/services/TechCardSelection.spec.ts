@@ -40,11 +40,11 @@ describe('services/TechCardSelection', () => {
   it('determineTech', () => {
     const techCardSelection = TechCardSelection.fromPersistence({
       techs: [
-        [Tech.WEAPONRY, TechPlaceholder.EMPTY, TechPlaceholder.EMPTY, Tech.ENGINEERING],
+        [Tech.WEAPONRY, Tech.ECONOMICS, Tech.ENERGY, Tech.ENGINEERING],
         [Tech.GOVERNMENT, Tech.MEDICINE, Tech.SCIENCE, TechPlaceholder.BLANK],
         [Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK],
         [Tech.ARMY, Tech.MILITARY, Tech.AGRICULTURE, Tech.COMMUNICATION]
-      ], removedTechs: []
+      ], removedTechs: [Tech.ECONOMICS, Tech.ENERGY]
     }, 2)
     const prosperityTechs = [Tech.ECONOMICS, Tech.MEDICINE, Tech.SCIENCE, Tech.TRANSPORTATION]
 
@@ -56,5 +56,20 @@ describe('services/TechCardSelection', () => {
 
     // rows [2,1,4,3] priority [PROSPERITY,ENGINEERING,COMMUNICATION,MAX_AGE] columns [1,3,2,4]
     expect(techCardSelection.determineTech(DraftingRowCards.get(3), DraftingPriorityCards.get(3), prosperityTechs)).to.eq(Tech.SCIENCE)
+  })
+
+  it('determineTech-rowNoLongerAvailable', () => {
+    const techCardSelection = TechCardSelection.fromPersistence({
+      techs: [
+        [Tech.WEAPONRY, Tech.ECONOMICS, Tech.ENERGY, Tech.ENGINEERING],
+        [Tech.GOVERNMENT, Tech.MEDICINE, Tech.SCIENCE, TechPlaceholder.BLANK],
+        [Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK],
+        [Tech.ARMY, Tech.MILITARY, Tech.AGRICULTURE, Tech.COMMUNICATION]
+      ], removedTechs: [Tech.ECONOMICS, Tech.ENERGY]
+    }, 2)
+    const prosperityTechs = [Tech.WEAPONRY, Tech.ENGINEERING, Tech.MILITARY, Tech.AGRICULTURE]
+
+    // rows [1,4,3,2] priority [PROSPERITY,ENGINEERING,COMMUNICATION,MAX_AGE] columns [1,2,4,3]
+    expect(techCardSelection.determineTech(DraftingRowCards.get(2), DraftingPriorityCards.get(3), prosperityTechs)).to.eq(Tech.MILITARY)
   })
 })

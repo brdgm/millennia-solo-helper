@@ -10,10 +10,14 @@ export default class CardDeck<T extends Card> {
 
   private readonly _pile
   private readonly _discard
+  private readonly _initialPile : T[]
+  private readonly _initialDiscard : T[]
 
   private constructor(pile : T[], discard : T[]) {
     this._pile = ref(pile)
     this._discard = ref(discard)
+    this._initialPile = [...pile]
+    this._initialDiscard = [...discard]
   }
 
   public get currentCard() : T|undefined {
@@ -52,6 +56,14 @@ export default class CardDeck<T extends Card> {
     const allCards = this._pile.value.concat(this._discard.value)
     this._pile.value = shuffle(allCards)
     this._discard.value = []
+  }
+
+  /**
+   * Reset card deck to initial state.
+   */
+  public reset() : void {
+    this._pile.value = [...this._initialPile]
+    this._discard.value = [...this._initialDiscard]
   }
 
   /**

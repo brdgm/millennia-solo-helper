@@ -47,8 +47,8 @@ export default class TechCardSelection {
    */
   public determineTech(rowCard: DraftingRowCard, priorityCard: DraftingPriorityCard, prosperityTechs: Tech[]) : Tech {
     for (const row of rowCard.rows) {
-      const rowTechs = this._techs.value[row - 1]
-      if (this.getOnlyTechs(rowTechs).length > 2) {
+      const rowTechs = this.techs[row - 1]
+      if (rowTechs.filter(tech => tech == TechPlaceholder.EMPTY).length < 2) {
         for (const priority of priorityCard.priority) {
           const matchingIndexes = this.findMatchingIndexes(rowTechs, priority, prosperityTechs)
           for (const column of rowCard.columns) {
