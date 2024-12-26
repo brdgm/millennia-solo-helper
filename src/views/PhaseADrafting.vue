@@ -20,7 +20,7 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
-import { useStateStore } from '@/store/state'
+import { Round, useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import TechCardDraft from '@/components/round/TechCardDraft.vue'
@@ -48,11 +48,19 @@ export default defineComponent({
         return `/round/${this.round-1}/upkeep`
       }
       return ''
+    },
+    roundData() : Round {
+      return this.state.rounds.find(item => item.round == this.round)!
     }
   },
   methods: {
     next() : void {
       this.$router.push(`/round/${this.round}/prosperity`)
+    },
+    reset() : void {
+      this.navigationState.techCardSelection.reset()
+      this.roundData.nextStartPlayer = undefined
+      this.roundData.nextArchitectPlayer = undefined
     }
   }
 })

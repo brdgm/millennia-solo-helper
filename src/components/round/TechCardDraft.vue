@@ -45,6 +45,7 @@ import TechPlaceholder from '@/services/enum/TechPlaceholder'
 import AppIcon from '../structure/AppIcon.vue'
 import getTechDuration from '@/util/getTechDuration'
 import getTechColor from '@/util/getTechColor'
+import toTech from '@/util/toTech'
 
 export default defineComponent({
   name: 'TechCardDraft',
@@ -92,35 +93,30 @@ export default defineComponent({
       return tech == Tech.COMMUNICATION
     },
     isProsperity(tech: (Tech|TechPlaceholder)) : boolean {
-      if (tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
-        return false
-      }
-      return this.navigationState.prosperityCards.current.flat().includes(tech)
+      const t = toTech(tech)
+      return t ? this.navigationState.prosperityCards.current.flat().includes(t) : false
     },
     getDuration(tech: (Tech|TechPlaceholder)) : number {
-      if (tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
-        return 0
-      }
-      return getTechDuration(tech, this.navigationState.round)
+      const t = toTech(tech)
+      return t ? getTechDuration(t, this.navigationState.round) : 0
     },
     getColor(tech: (Tech|TechPlaceholder)) : string {
-      if (tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
-        return ''
-      }
-      return getTechColor(tech)
+      const t = toTech(tech)
+      return t ? getTechColor(t) : ''
     },
     hasTwoEmpty(techs: (Tech|TechPlaceholder)[]) : boolean {
       return techs.filter(tech => tech == TechPlaceholder.EMPTY).length >= 2
     },
     remove(tech: (Tech|TechPlaceholder)) {
-      if (this.removeAnimation || tech == TechPlaceholder.BLANK || tech == TechPlaceholder.EMPTY) {
+      const t = toTech(tech)
+      if (this.removeAnimation || !t) {
         return
       }
-      document.querySelector(`.techCard[data-tech="${tech}"]`)?.classList.add('remove')
+      document.querySelector(`.techCard[data-tech="${t}"]`)?.classList.add('remove')
       this.removeAnimation = true
       setTimeout(() => {
         this.removeAnimation = false
-        this.navigationState.techCardSelection.remove(tech)
+        this.navigationState.techCardSelection.remove(t)
       }, 400)
     }
   }

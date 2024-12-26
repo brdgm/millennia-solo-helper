@@ -8,6 +8,7 @@ import DraftingRowCard from './DraftingRowCard'
 import DraftingPriorityCard from './DraftingPriorityCard'
 import TechMatch from './enum/TechMatch'
 import getTechDuration from '@/util/getTechDuration'
+import toTech from '@/util/toTech'
 
 /**
  * Manages the drafting of tech cards.
@@ -62,7 +63,7 @@ export default class TechCardSelection {
   }
   
   private getOnlyTechs(techs: (Tech|TechPlaceholder)[]) : Tech[] {
-    return techs.filter(tech => tech != TechPlaceholder.BLANK && tech != TechPlaceholder.EMPTY) as Tech[]
+    return techs.map(tech => toTech(tech)).filter(tech => tech != undefined)
   }
 
   private findMatchingIndexes(techs: (Tech|TechPlaceholder)[], priority: (Tech|TechMatch), prosperityTechs: Tech[]) : number[] {

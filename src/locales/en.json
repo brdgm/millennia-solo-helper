@@ -85,6 +85,10 @@
     "7": "Contemporary age",
     "8": "Future age"
   },
+  "player": {
+    "player": "Player",
+    "bot": "Automa"
+  },
   "notfound": {
     "title": "Not Found"
   },
