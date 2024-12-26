@@ -15,9 +15,10 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
-import { useStateStore } from '@/store/state'
+import { Round, useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
+import TechCardSelection from '@/services/TechCardSelection'
 
 export default defineComponent({
   name: 'PhaseGUpkeep',
@@ -42,7 +43,22 @@ export default defineComponent({
   },
   methods: {
     next() : void {
-      this.$router.push(`/round/${this.round + 1}/drafting`)
+      const nextRound = this.round + 1
+      const { startPlayer, architectPlayer, prosperityCards, botCards, rowPlaceholders } = this.navigationState
+      prosperityCards.prepareForNextRound()
+      botCards.prepareForNextRound()
+      rowPlaceholders.prepareForNextRound()
+      const round : Round = {
+        round: nextRound,
+        startPlayer,
+        architectPlayer,
+        prosperityCards: prosperityCards.toPersistence(),
+        botCards: botCards.toPersistence(),
+        rowPlaceholders: rowPlaceholders.toPersistence(),
+        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, nextRound).toPersistence()
+      }
+      this.state.storeRound(round)
+      this.$router.push(`/round/${nextRound}/drafting`)
     }
   }
 })

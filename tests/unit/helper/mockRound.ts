@@ -14,7 +14,9 @@ export default function (params?: MockRoundParams) : Round {
       war: { pile: [], discard: [] }
     },
     rowPlaceholders: params?.rowPlaceholders ?? { rows: [] },
-    techCardSelection: params?.techCardSelection ?? { techs: [] }
+    techCardSelection: params?.techCardSelection ?? { techs: [], removedTechs: [] },
+    nextStartPlayer: params?.nextStartPlayer,
+    nextArchitectPlayer: params?.nextArchitectPlayer
   }
   return round
 }
@@ -27,4 +29,6 @@ export interface MockRoundParams {
   botCards?: BotCardsPersistence
   rowPlaceholders?: RowPlaceholdersPersistence
   techCardSelection?: TechCardSelectionPersistence
+  nextStartPlayer?: Player,
+  nextArchitectPlayer?: Player,
 }

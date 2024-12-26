@@ -48,6 +48,8 @@ export interface Round {
   botCards: BotCardsPersistence
   rowPlaceholders: RowPlaceholdersPersistence
   techCardSelection: TechCardSelectionPersistence
+  nextStartPlayer?: Player
+  nextArchitectPlayer?: Player
 }
 
 export interface BotCardsPersistence {

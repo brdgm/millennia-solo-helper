@@ -25,8 +25,8 @@ export default class NavigationState {
     if (!roundData) {
       throw new Error(`Round ${this.round} not found`)
     }
-    this.startPlayer = roundData.startPlayer
-    this.architectPlayer = roundData.architectPlayer
+    this.startPlayer = roundData.nextStartPlayer ?? roundData.startPlayer
+    this.architectPlayer = roundData.nextArchitectPlayer ?? roundData.architectPlayer
     this.prosperityCards = ProsperityCards.fromPersistence(roundData.prosperityCards)
     this.botCards = BotCards.fromPersistence(roundData.botCards)
     this.rowPlaceholders = RowPlaceholders.fromPersistence(roundData.rowPlaceholders)
