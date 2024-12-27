@@ -91,6 +91,21 @@ export default class TechCardSelection {
   }
 
   /**
+   * Get income for row given tech is/was placed in.
+   * @param tech Tech
+   * @returns Income gold
+   */
+  public getIncome(tech: Tech) : number {
+    for (let row = 1; row <= 4; row++) {
+      const techs = this._techs.value[row - 1]
+      if (techs.includes(tech)) {
+        return row + 1
+      }
+    }
+    throw new Error('Tech card not found.')
+  }
+
+  /**
    * Resets the removed tech cards.
    */
   public reset() : void {

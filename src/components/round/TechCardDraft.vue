@@ -1,6 +1,10 @@
 <template>
   <div class="techs">
     <div class="techRow" v-for="(techs,row) in techCardSelection.techs" :key="row">
+      <div class="income">
+        <AppIcon :name="row==3 ? 'income-lock' : 'income'" class="icon"/>
+        <div class="number">{{row+2}}</div>
+      </div>
       <template v-for="(tech,col) in techs" :key="col">
         <div v-if="isEmpty(tech)" class="techCard empty"></div>
         <div v-else-if="isBlank(tech)" class="techCard blank"></div>
@@ -30,6 +34,14 @@
     <h5>{{t('phaseADrafting.playerDraft')}}</h5>
     <div class="techs">
       <div class="techRow">
+        <div class="income1">
+          <AppIcon name="income" class="icon"/>
+          <div class="number">{{playerIncomeTotal}}</div>
+        </div>
+        <div class="income2" v-if="playerIncomeLockedTotal > 0">
+          <AppIcon name="income-lock" class="icon"/>
+          <div class="number">{{playerIncomeLockedTotal}}</div>
+        </div>
         <TechCard v-for="tech of playerTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard"/>
       </div>
     </div>
@@ -57,11 +69,13 @@ import TechPlaceholder from '@/services/enum/TechPlaceholder'
 import toTech from '@/util/toTech'
 import Player from '@/services/enum/Player'
 import TechCard from './TechCard.vue'
+import AppIcon from '../structure/AppIcon.vue'
 
 export default defineComponent({
   name: 'TechCardDraft',
   components: {
-    TechCard
+    TechCard,
+    AppIcon
   },
   setup() {
     const { t } = useI18n()
@@ -99,6 +113,12 @@ export default defineComponent({
     },
     draftingCompleted() : boolean {
       return this.botMarkerPlaced == 4 && this.playerMarkerPlaced == 4
+    },
+    playerIncomeTotal() : number {
+      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
+    },
+    playerIncomeLockedTotal() : number {
+      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
     },
     roundData() : Round {
       return this.state.rounds.find(item => item.round == this.navigationState.round)!
@@ -146,7 +166,6 @@ export default defineComponent({
       const draftingRowCard = botCards.draftingRow.draw()
       const draftingPriorityCard = botCards.draftingPriority.draw()
       const tech = techCardSelection.determineTech(draftingRowCard, draftingPriorityCard, prosperityCards.current.flat())
-      await this.remove(tech)
       this.botTechs.push(tech)
       if (tech == Tech.ARMY) {
         this.roundData.nextStartPlayer = Player.BOT
@@ -154,6 +173,7 @@ export default defineComponent({
       if (tech == Tech.ENGINEERING) {
         this.roundData.nextArchitectPlayer = Player.BOT
       }
+      await this.remove(tech)
       await this.nextTurn()
     },
     async nextTurnPlayer() {
@@ -165,14 +185,15 @@ export default defineComponent({
         return
       }
       this.playerTurn = false
-      await this.remove(t)
       this.playerTechs.push(t)
+      this.roundData.playerTechs = this.playerTechs
       if (t == Tech.ARMY) {
         this.roundData.nextStartPlayer = Player.PLAYER
       }
       if (t == Tech.ENGINEERING) {
         this.roundData.nextArchitectPlayer = Player.PLAYER
       }
+      await this.remove(t)
       await this.nextTurn()
     },
     async reset() {
@@ -181,6 +202,7 @@ export default defineComponent({
       this.navigationState.botCards.draftingPriority.reset()
       this.roundData.nextStartPlayer = undefined
       this.roundData.nextArchitectPlayer = undefined
+      this.roundData.playerTechs = undefined
 
       this.botTechs = []
       this.playerTechs = []
@@ -212,7 +234,40 @@ export default defineComponent({
 }
 .techRow {
   display: flex;
-  width: calc(4 * (80px + 10px));
+  width: calc(4 * (80px + 10px) + 40px);
+  .income, .income1, .income2 {
+    position: relative;
+    width: 40px;
+    .icon {
+      position: absolute;
+      bottom: 45px;
+      width: 35px;
+    }
+    .number {
+      position: absolute;
+      bottom: 62px;
+      text-align: center;
+      width: 34px;
+      font-weight: bold;
+    }
+  }
+  .income1 {
+    .icon {
+      bottom: 80px;
+    }
+    .number {
+      bottom: 97px;
+    }
+  }
+  .income2 {
+    margin-left: -40px;
+    .icon {
+      bottom: 10px;
+    }
+    .number {
+      bottom: 27px;
+    }
+  }
 }
 .techCard {
   position: relative;
