@@ -9,31 +9,31 @@
       <table class="table table">
         <tbody>
           <tr>
-            <td>★</td>
+            <th scope="row">★</th>
             <td>100 VP</td>
           </tr>
           <tr>
-            <td>★★</td>
+            <th scope="row">★★</th>
             <td>120 VP</td>
           </tr>
           <tr>
-            <td>★★★</td>
+            <th scope="row">★★★</th>
             <td>150 VP</td>
           </tr>
           <tr>
-            <td>★★★★</td>
+            <th scope="row">★★★★</th>
             <td>175 VP</td>
           </tr>
           <tr>
-            <td>★★★★★</td>
+            <th scope="row">★★★★★</th>
             <td>200 VP</td>
           </tr>
           <tr>
-            <td>★★★★★★</td>
+            <th scope="row">★★★★★★</th>
             <td>225 VP</td>
           </tr>
           <tr>
-            <td>★★★★★★★</td>
+            <th scope="row">★★★★★★★</th>
             <td>250 VP</td>
           </tr>
         </tbody>
