@@ -3,9 +3,7 @@
 
   <h1 class="mb-3">{{t('phaseDConstruction.title')}}</h1>
 
-  <button class="btn btn-primary btn-lg mt-4" @click="next()">
-    {{t('action.next')}}
-  </button>
+  <ConstructionDraft :navigationState="navigationState" :nextButtonRouteTo="nextButtonRouteTo"/>
 
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
@@ -18,12 +16,14 @@ import { useRoute } from 'vue-router'
 import { useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
+import ConstructionDraft from '@/components/round/ConstructionDraft.vue'
 
 export default defineComponent({
   name: 'PhaseDConstruction',
   components: {
     FooterButtons,
-    SideBar
+    SideBar,
+    ConstructionDraft
   },
   setup() {
     const { t } = useI18n()
@@ -38,11 +38,9 @@ export default defineComponent({
   computed: {
     backButtonRouteTo() : string {
       return `/round/${this.round}/income`
-    }
-  },
-  methods: {
-    next() : void {
-      this.$router.push(`/round/${this.round}/actions`)
+    },
+    nextButtonRouteTo() : string {
+      return `/round/${this.round}/actions`
     }
   }
 })

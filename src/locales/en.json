@@ -59,7 +59,11 @@
     "skip": "Automa skips this phase."
   },
   "phaseDConstruction": {
-    "title": "D: Construction"
+    "title": "D: Construction",
+    "remove": "Remove:",
+    "pass": "Pass",
+    "notAvailable": "Not Available",
+    "playerAction": "Buy a wonder or building and click on <i>Next</i>.<br/>Click on <i>Pass</i> to end the construction phase."
   },
   "phaseEActions": {
     "title": "E: Actions",
