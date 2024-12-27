@@ -33,12 +33,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStateStore } from '@/store/state'
 import NavigationState from '@/util/NavigationState'
 import AppIcon from '../structure/AppIcon.vue'
-import { ref } from 'vue'
 import Player from '@/services/enum/Player'
 import ConstructionCard from '@/services/ConstructionCard'
 

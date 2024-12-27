@@ -1,6 +1,46 @@
 <template>
   <h1 class="mb-3">{{t('endOfGame.title')}}</h1>
 
+  <p v-html="t('endOfGame.finalScore')"></p>
+
+  <p v-html="t('endOfGame.scoreTable')"></p>
+  <div class="row">
+    <div class="col-10 offset-1 col-sm-8 col-md-6 col-lg-4">
+      <table class="table table">
+        <tbody>
+          <tr>
+            <td>★</td>
+            <td>100 VP</td>
+          </tr>
+          <tr>
+            <td>★★</td>
+            <td>120 VP</td>
+          </tr>
+          <tr>
+            <td>★★★</td>
+            <td>150 VP</td>
+          </tr>
+          <tr>
+            <td>★★★★</td>
+            <td>175 VP</td>
+          </tr>
+          <tr>
+            <td>★★★★★</td>
+            <td>200 VP</td>
+          </tr>
+          <tr>
+            <td>★★★★★★</td>
+            <td>225 VP</td>
+          </tr>
+          <tr>
+            <td>★★★★★★★</td>
+            <td>250 VP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
 
