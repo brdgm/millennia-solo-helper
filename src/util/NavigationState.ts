@@ -20,9 +20,19 @@ export default class NavigationState {
   constructor(route: RouteLocation, state: State) {    
     this.round = getIntRouteParam(route, 'round')
 
-    const roundData = state.rounds.find(item => item.round === this.round)
+    let roundData = state.rounds.find(item => item.round === this.round)
     if (!roundData) {
-      throw new Error(`Round ${this.round} not found`)
+      // should never happen
+      const rowPlaceholders = RowPlaceholders.new()
+      roundData = {
+        round: this.round,
+        startPlayer: Player.PLAYER,
+        architectPlayer: Player.BOT,
+        prosperityCards: ProsperityCards.new().toPersistence(),
+        botCards: BotCards.new(state.setup.difficultyLevel).toPersistence(),
+        rowPlaceholders: rowPlaceholders.toPersistence(),
+        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, this.round).toPersistence()
+      }
     }
     this.roundData = roundData
     this.prosperityCards = ProsperityCards.fromPersistence(roundData.prosperityCards)

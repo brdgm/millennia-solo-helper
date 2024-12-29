@@ -75,6 +75,7 @@
     "advance": "Automa advances {steps} steps on the war track.",
     "outmax": "If the automa maxes out the war track, it gains 1 VP per step beyond 7.",
     "resolve": "Then the war phase is resolved normally.",
+    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power.",
     "trackVP": "Track the VP the automa gains during the war phase on the VP track. "
   },
   "phaseGUpkeep": {
