@@ -5,6 +5,8 @@
 
   <ConstructionDraft :navigationState="navigationState" :nextButtonRouteTo="nextButtonRouteTo"/>
 
+  <DebugInfo :navigationState="navigationState"/>
+
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
 
@@ -17,13 +19,15 @@ import { useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import ConstructionDraft from '@/components/round/ConstructionDraft.vue'
+import DebugInfo from '@/components/round/DebugInfo.vue'
 
 export default defineComponent({
   name: 'PhaseDConstruction',
   components: {
     FooterButtons,
     SideBar,
-    ConstructionDraft
+    ConstructionDraft,
+    DebugInfo
   },
   setup() {
     const { t } = useI18n()

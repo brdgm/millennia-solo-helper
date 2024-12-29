@@ -13,12 +13,17 @@
     <li v-html="t('phaseFWar.advance', {steps:warTrackAdvanceSteps})"></li>
     <li v-html="t('phaseFWar.outmax')"></li>
     <li v-html="t('phaseFWar.resolve')"></li>
+    <ul v-if="round==8">
+      <li v-html="t('phaseFWar.resolveLastRound')"></li>
+    </ul>
     <li v-html="t('phaseFWar.trackVP')"></li>
   </ul>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
     {{t('action.next')}}
   </button>
+
+  <DebugInfo :navigationState="navigationState"/>
 
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
@@ -32,13 +37,15 @@ import { useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import AppIcon from '@/components/structure/AppIcon.vue'
+import DebugInfo from '@/components/round/DebugInfo.vue'
 
 export default defineComponent({
   name: 'PhaseFWar',
   components: {
     FooterButtons,
     SideBar,
-    AppIcon
+    AppIcon,
+    DebugInfo
   },
   setup() {
     const { t } = useI18n()

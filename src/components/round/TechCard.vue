@@ -18,7 +18,7 @@
       <AppIcon name="prosperity-money" class="icon"/>
     </div>
     <div class="durations">
-      <div class="duration" v-for="age of getDuration(tech)" :key="age" :style="{'z-index':100-age}"><div>{{age}}</div></div>
+      <div class="duration" v-for="duration of getDuration(tech)" :key="duration" :style="{'z-index':100-duration}"><div>{{duration + round - 1}}</div></div>
     </div>
   </div>
 </template>
@@ -44,6 +44,11 @@ export default defineComponent({
     tech: {
       type: String as PropType<Tech>,
       required: true
+    }
+  },
+  computed: {
+    round() : number {
+      return this.navigationState.round
     }
   },
   methods: {

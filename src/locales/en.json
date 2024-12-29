@@ -3,7 +3,7 @@
   "home": {
     "title": "Millennia Solo Helper",
     "play1": "Play Millennia against Automa, the solo opponent.",
-    "play2": "This application replaces the Automa cards, and guides you through the game flow.",
+    "play2": "This application replaces the Automa cards, and guides you through the game flow. Additionally, it automates the tech card drafting and prosperity card selection.",
     "feedback": "Discussion and Feedback:"
   },
   "setup": {
@@ -24,9 +24,10 @@
     "title": "Setup Automa",
     "setup": {
       "gameBoard": "Setup the game the same way as a 2-player game.",
-      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against Automa.",
-      "playerColor": "Choose a player color for the automa. The automa only needs 2 track tokens.",
-      "trackTokens": "Place the automa track tokens on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
+      "prosperityCards": "You do not need to set up the prosperity cards, they are managed and displayed by the application.",
+      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against Automa. After each tech drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
+      "playerColor": "Choose a player color for the automa. The automa only needs 1 track marker and 1 VP marker.",
+      "trackTokens": "Place the automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
       "startPlayer": {
         "player": "<b>You</b> are the start player. Take 10 Gold. Take the first player token.",
         "bot": "<b>Automa</b> is the start player. Give it the first player token."
@@ -41,7 +42,7 @@
       "noGold": "The automa never has or gains any gold.",
       "noActions": "The automa does not perform any actions in the action phase.",
       "onlyWarTrack": "The automa only promotes on the war track and the VP track but on no other tracks.",
-      "noVP": "The automa does not gain or lose any VP other than from the war phase."
+      "noVP": "The automa does not gain any VP other than from the war phase."
     }
   },
   "phaseADrafting": {
@@ -74,7 +75,8 @@
     "advance": "Automa advances {steps} steps on the war track.",
     "outmax": "If the automa maxes out the war track, it gains 1 VP per step beyond 7.",
     "resolve": "Then the war phase is resolved normally.",
-    "trackVP": "Track the VP the automa during the war phase on the VP track. "
+    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power.",
+    "trackVP": "Track the VP the automa gains during the war phase on the VP track. "
   },
   "phaseGUpkeep": {
     "title": "G: Upkeep",
@@ -89,8 +91,8 @@
     "round": "Age {round}"
   },
   "difficultyLevel": {
-    "1": "Normal",
-    "2": "Hard"
+    "1": "Normal - without 5-step war cards",
+    "2": "Hard - all war cards"
   },
   "age": {
     "1": "Bronze age",
