@@ -9,6 +9,8 @@
     {{t('action.next')}}
   </button>
 
+  <DebugInfo :navigationState="navigationState"/>
+
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
 
@@ -21,12 +23,14 @@ import { Round, useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import TechCardSelection from '@/services/TechCardSelection'
+import DebugInfo from '@/components/round/DebugInfo.vue'
 
 export default defineComponent({
   name: 'PhaseGUpkeep',
   components: {
     FooterButtons,
-    SideBar
+    SideBar,
+    DebugInfo
   },
   setup() {
     const { t } = useI18n()

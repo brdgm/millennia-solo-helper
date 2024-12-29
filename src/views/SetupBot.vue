@@ -8,6 +8,7 @@
       <li v-html="t('setupBot.setup.gameBoard')"></li>
       <ul>
         <li v-html="t('setupBot.setup.techCards')"></li>
+        <li v-html="t('setupBot.setup.prosperityCards')"></li>
       </ul>
       <li v-html="t('setupBot.setup.playerColor')"></li>
       <li v-html="t('setupBot.setup.trackTokens')"></li>

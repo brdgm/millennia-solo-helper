@@ -21,6 +21,8 @@
     {{t('action.next')}}
   </button>
 
+  <DebugInfo :navigationState="navigationState"/>
+
   <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
 </template>
 
@@ -34,13 +36,15 @@ import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import Tech from '@/services/enum/Tech'
 import AppIcon from '@/components/structure/AppIcon.vue'
+import DebugInfo from '@/components/round/DebugInfo.vue'
 
 export default defineComponent({
   name: 'PhaseCIncome',
   components: {
     FooterButtons,
     SideBar,
-    AppIcon
+    AppIcon,
+    DebugInfo
   },
   setup() {
     const { t } = useI18n()
