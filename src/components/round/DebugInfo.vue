@@ -14,12 +14,12 @@
 import { defineComponent } from 'vue'
 import { useStateStore } from '@/store/state'
 import CardDeck from '@/services/CardDeck'
+import Card from '@/services/Card'
 import NavigationState from '@/util/NavigationState'
 import DraftingRowCard from '@/services/DraftingRowCard'
 import DraftingPriorityCard from '@/services/DraftingPriorityCard'
 import ConstructionCard from '@/services/ConstructionCard'
 import WarCard from '@/services/WarCard'
-import Card from '@/services/Card'
 
 export default defineComponent({
   name: 'DebugInfo',
@@ -51,7 +51,7 @@ export default defineComponent({
     getCardDeckInfo(deck: CardDeck<Card>) : string {
       return `<i>pile</i>: ${deck.pile.map(this.getCardInfo)}, <i>discard</i>: ${deck.discard.map(this.getCardInfo)}`
     },
-    getCardInfo(card: any) : string {
+    getCardInfo(card: any) : string {  // eslint-disable-line @typescript-eslint/no-explicit-any
       return '{' + Object.keys(card)
           .filter(key => key !== 'id')
           .map(key => `${key}: ${card[key]}`)
