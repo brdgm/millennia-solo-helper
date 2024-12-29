@@ -50,7 +50,9 @@ export interface Round {
   techCardSelection: TechCardSelectionPersistence
   nextStartPlayer?: Player
   nextArchitectPlayer?: Player
+  botTechs?: Tech[]
   playerTechs?: Tech[]
+  playerSpecialActions?: number
 }
 
 export interface BotCardsPersistence {

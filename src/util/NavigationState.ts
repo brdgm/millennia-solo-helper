@@ -1,4 +1,4 @@
-import { State } from '@/store/state'
+import { Round, State } from '@/store/state'
 import { RouteLocation } from 'vue-router'
 import getIntRouteParam from '@brdgm/brdgm-commons/src/util/router/getIntRouteParam'
 import Player from '@/services/enum/Player'
@@ -10,13 +10,12 @@ import TechCardSelection from '@/services/TechCardSelection'
 export default class NavigationState {
 
   readonly round : number
-
-  readonly startPlayer : Player
-  readonly architectPlayer : Player
   readonly prosperityCards : ProsperityCards
   readonly botCards : BotCards
   readonly rowPlaceholders : RowPlaceholders
   readonly techCardSelection : TechCardSelection
+
+  private roundData : Round
 
   constructor(route: RouteLocation, state: State) {    
     this.round = getIntRouteParam(route, 'round')
@@ -25,12 +24,19 @@ export default class NavigationState {
     if (!roundData) {
       throw new Error(`Round ${this.round} not found`)
     }
-    this.startPlayer = roundData.nextStartPlayer ?? roundData.startPlayer
-    this.architectPlayer = roundData.nextArchitectPlayer ?? roundData.architectPlayer
+    this.roundData = roundData
     this.prosperityCards = ProsperityCards.fromPersistence(roundData.prosperityCards)
     this.botCards = BotCards.fromPersistence(roundData.botCards)
     this.rowPlaceholders = RowPlaceholders.fromPersistence(roundData.rowPlaceholders)
     this.techCardSelection = TechCardSelection.fromPersistence(roundData.techCardSelection, this.round)
+  }
+
+  public get startPlayer() : Player {
+    return this.roundData.nextStartPlayer ?? this.roundData.startPlayer
+  }
+
+  public get architectPlayer() : Player {
+    return this.roundData.nextArchitectPlayer ?? this.roundData.architectPlayer
   }
 
 }

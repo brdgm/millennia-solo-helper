@@ -59,9 +59,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Round, useStateStore } from '@/store/state'
+import { useStateStore } from '@/store/state'
 import NavigationState from '@/util/NavigationState'
 import TechCardSelection from '@/services/TechCardSelection'
 import Tech from '@/services/enum/Tech'
@@ -77,10 +77,16 @@ export default defineComponent({
     TechCard,
     AppIcon
   },
-  setup() {
+  setup(props) {
     const { t } = useI18n()
     const state = useStateStore()
-    return { t, state }
+
+    const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
+    const botTechs = ref(roundData.botTechs ?? [])
+    const playerTechs = ref(roundData.playerTechs ?? [])
+    const playerSpecialActions = ref(roundData.playerSpecialActions ?? 0)
+
+    return { t, state, roundData, botTechs, playerTechs, playerSpecialActions }
   },
   props: {
     navigationState: {
@@ -95,9 +101,6 @@ export default defineComponent({
   data() {
     return {
       removeAnimation: false,
-      botTechs: [] as Tech[],
-      playerTechs: [] as Tech[],
-      playerSpecialActions: 0,
       playerTurn: false
     }
   },
@@ -119,9 +122,6 @@ export default defineComponent({
     },
     playerIncomeLockedTotal() : number {
       return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
-    },
-    roundData() : Round {
-      return this.state.rounds.find(item => item.round == this.navigationState.round)!
     }
   },
   methods: {
@@ -143,6 +143,7 @@ export default defineComponent({
       await new Promise(resolve => setTimeout(resolve, 400));
       this.removeAnimation = false
       this.navigationState.techCardSelection.remove(tech)
+      this.persist()
     },
     async nextTurn() {
       if (this.draftingCompleted) {
@@ -197,7 +198,7 @@ export default defineComponent({
       await this.nextTurn()
     },
     async reset() {
-      this.navigationState.techCardSelection.reset()
+      this.techCardSelection.reset()
       this.navigationState.botCards.draftingRow.reset()
       this.navigationState.botCards.draftingPriority.reset()
       this.roundData.nextStartPlayer = undefined
@@ -208,6 +209,7 @@ export default defineComponent({
       this.playerTechs = []
       this.playerSpecialActions = 0
 
+      this.persist()
       await this.nextTurn()
     },
     async next() {
@@ -219,6 +221,12 @@ export default defineComponent({
         this.playerTurn = false
         await this.nextTurn()
       }
+    },
+    persist() : void {
+      this.roundData.techCardSelection = this.techCardSelection.toPersistence()
+      this.roundData.botTechs = this.botTechs
+      this.roundData.playerTechs = this.playerTechs
+      this.roundData.playerSpecialActions = this.playerSpecialActions
     }
   },
   mounted() {
