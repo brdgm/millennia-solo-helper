@@ -15,7 +15,7 @@ export default class NavigationState {
   readonly rowPlaceholders : RowPlaceholders
   readonly techCardSelection : TechCardSelection
 
-  private roundData : Round
+  private readonly roundData : Round
 
   constructor(route: RouteLocation, state: State) {    
     this.round = getIntRouteParam(route, 'round')
