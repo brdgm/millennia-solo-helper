@@ -1,5 +1,5 @@
 <template>
-  <div class="techs">
+  <div class="techs mb-3">
     <div class="techRow" v-for="(techs,row) in techCardSelection.techs" :key="row">
       <div class="income">
         <AppIcon :name="row==3 ? 'income-lock' : 'income'" class="icon"/>
@@ -19,39 +19,41 @@
 
   <div class="row" v-if="playerTurn">
     <div class="col">
-      <div class="alert alert-primary mt-3" v-html="t('phaseADrafting.playerTurnSelect')"></div>
+      <div class="alert alert-primary" v-html="t('phaseADrafting.playerTurnSelect')"></div>
     </div>
   </div>
 
-  <button class="btn btn-primary btn-lg mt-4 me-3" @click="next()">
+  <button class="btn btn-primary btn-lg me-3 mt-2" @click="next()">
     {{t('action.next')}}
   </button>
-  <button class="btn btn-outline-secondary btn-sm mt-4" @click="reset()">
+  <button class="btn btn-outline-secondary btn-sm mt-2" @click="reset()">
     {{t('action.reset')}}
   </button>
 
-  <div v-if="playerTechs.length > 0" class="mt-3">
-    <h5>{{t('phaseADrafting.playerDraft')}}</h5>
-    <div class="techs">
-      <div class="techRow">
-        <div class="income1">
-          <AppIcon name="income" class="icon"/>
-          <div class="number">{{playerIncomeTotal}}</div>
+  <div class="draftedCards">
+    <div v-if="playerTechs.length > 0" class="mt-3">
+      <h5>{{t('phaseADrafting.playerDraft')}}</h5>
+      <div class="techs">
+        <div class="techRow">
+          <div class="income1">
+            <AppIcon name="income" class="icon"/>
+            <div class="number">{{playerIncomeTotal}}</div>
+          </div>
+          <div class="income2" v-if="playerIncomeLockedTotal > 0">
+            <AppIcon name="income-lock" class="icon"/>
+            <div class="number">{{playerIncomeLockedTotal}}</div>
+          </div>
+          <TechCard v-for="tech of playerTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard"/>
         </div>
-        <div class="income2" v-if="playerIncomeLockedTotal > 0">
-          <AppIcon name="income-lock" class="icon"/>
-          <div class="number">{{playerIncomeLockedTotal}}</div>
-        </div>
-        <TechCard v-for="tech of playerTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard"/>
       </div>
     </div>
-  </div>
 
-  <div v-if="botTechs.length > 0" class="mt-3">
-    <h5>{{t('phaseADrafting.botDraft')}}</h5>
-    <div class="techs">
-      <div class="techRow">
-        <TechCard v-for="tech of botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
+    <div v-if="botTechs.length > 0" class="mt-3">
+      <h5>{{t('phaseADrafting.botDraft')}}</h5>
+      <div class="techs">
+        <div class="techRow">
+          <TechCard v-for="tech of botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
+        </div>
       </div>
     </div>
   </div>
@@ -219,6 +221,7 @@ export default defineComponent({
       else {
         this.playerSpecialActions++
         this.playerTurn = false
+        this.persist()
         await this.nextTurn()
       }
     },
@@ -266,6 +269,14 @@ export default defineComponent({
     .number {
       bottom: 97px;
     }
+    @media (max-width: 600px) {
+      .icon {
+        bottom: 65px;
+      }
+      .number {
+        bottom: 82px;
+      }
+    }
   }
   .income2 {
     margin-left: -40px;
@@ -275,6 +286,17 @@ export default defineComponent({
     .number {
       bottom: 27px;
     }
+    @media (max-width: 600px) {
+      .icon {
+        bottom: 0px;
+      }
+      .number {
+        bottom: 17px;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    width: calc(4 * (70px + 10px) + 40px);
   }
 }
 .techCard {
@@ -284,5 +306,20 @@ export default defineComponent({
   height: 120px;
   margin-right: 10px;
   margin-bottom: 10px;
+  @media (max-width: 600px) {
+    width: 70px;
+    height: 100px;
+  }
+}
+.draftedCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  @media (min-width: 1100px) {
+    display: block;
+    position: absolute;
+    right: 180px;
+    top: 40px;
+  }
 }
 </style>

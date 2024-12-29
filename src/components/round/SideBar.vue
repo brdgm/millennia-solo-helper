@@ -1,7 +1,9 @@
 <template>
   <div class="sidebar">
-    <span class="fw-bold">{{t('sideBar.round', {round})}}</span><br/>
-    <span class="small fst-italic">{{t(`age.${round}`)}}</span>
+    <div>
+      <span class="fw-bold">{{t('sideBar.round', {round})}}</span><br/>
+      <span class="small fst-italic">{{t(`age.${round}`)}}</span>
+    </div>
 
     <div class="prosperityCard" v-for="(techs,index) in navigationState.prosperityCards.current" :key="index">
       <div class="cardTop">
@@ -130,8 +132,20 @@ export default defineComponent({
     width: 30px;
   }
   @media (max-width: 600px) {
+    float: none;
+    display: flex;
+    gap: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-top: -15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 5px 5px 10px 5px;
+    width: 100%;
     font-size: 0.8rem;
-    width: 120px;
     .prosperityCard {
       width: 80px;
       .cardTop {
