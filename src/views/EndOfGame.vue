@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="abortGame"/>
+  <FooterButtons :backButtonRouteTo="backButtonRouteTo" endGameButtonType="endGame"/>
 </template>
 
 <script lang="ts">
