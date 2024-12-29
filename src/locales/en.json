@@ -1,0 +1,137 @@
+{
+  "gameTitle": "Millennia",
+  "home": {
+    "title": "Millennia Solo Helper",
+    "play1": "Play Millennia against Automa, the solo opponent.",
+    "play2": "This application replaces the Automa cards, and guides you through the game flow. Additionally, it automates the tech card drafting and prosperity card selection.",
+    "feedback": "Discussion and Feedback:"
+  },
+  "setup": {
+    "title": "Setup Game",
+    "startPlayer": {
+      "title": "Start Player",
+      "random": "Random",
+      "player": "Player",
+      "bot": "Automa"
+    },
+    "difficultyLevel": {
+      "title": "Difficulty Level",
+      "easy": "Easy",
+      "hard": "Hard"
+    }
+  },
+  "setupBot": {
+    "title": "Setup Automa",
+    "setup": {
+      "gameBoard": "Setup the game the same way as a 2-player game.",
+      "prosperityCards": "You do not need to set up the prosperity cards, they are managed and displayed by the application.",
+      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against Automa. After each tech drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
+      "playerColor": "Choose a player color for the automa. The automa only needs 1 track marker and 1 VP marker.",
+      "trackTokens": "Place the automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
+      "startPlayer": {
+        "player": "<b>You</b> are the start player. Take 10 Gold. Take the first player token.",
+        "bot": "<b>Automa</b> is the start player. Give it the first player token."
+      },
+      "secondPlayer": {
+        "player": "<b>You</b> are the second player. Take 12 Gold. Take the architect token.",
+        "bot": "<b>Automa</b> is the second player. Give it the architect token."
+      }
+    },
+    "botRules": {
+      "intro": "Differences between the automa gameplay and a human player:",
+      "noGold": "The automa never has or gains any gold.",
+      "noActions": "The automa does not perform any actions in the action phase.",
+      "onlyWarTrack": "The automa only promotes on the war track and the VP track but on no other tracks.",
+      "noVP": "The automa does not gain any VP other than from the war phase."
+    }
+  },
+  "phaseADrafting": {
+    "title": "A: Drafting",
+    "playerTurnSelect": "Please place your drafting marker on the board and select a tech card, or click on <i>Next</i> if you selected a special action.",
+    "playerDraft": "Player draft",
+    "botDraft": "Automa draft"
+  },
+  "phaseBProsperity": {
+    "title": "B: Prosperity",
+    "skip": "Automa skips this phase."
+  },
+  "phaseCIncome": {
+    "title": "C: Income",
+    "skip": "Automa skips this phase."
+  },
+  "phaseDConstruction": {
+    "title": "D: Construction",
+    "remove": "Remove:",
+    "pass": "Pass",
+    "notAvailable": "Not Available",
+    "playerAction": "Buy a wonder or building and click on <i>Next</i>.<br/>Click on <i>Pass</i> to end the construction phase."
+  },
+  "phaseEActions": {
+    "title": "E: Actions",
+    "skip": "Automa skips this phase."
+  },
+  "phaseFWar": {
+    "title": "F: War",
+    "advance": "Automa advances {steps} steps on the war track.",
+    "outmax": "If the automa maxes out the war track, it gains 1 VP per step beyond 7.",
+    "resolve": "Then the war phase is resolved normally.",
+    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power.",
+    "trackVP": "Track the VP the automa gains during the war phase on the VP track. "
+  },
+  "phaseGUpkeep": {
+    "title": "G: Upkeep",
+    "skip": "Automa skips this phase."
+  },
+  "endOfGame": {
+    "title": "End Of Game",
+    "finalScore": "Resolve the end-game as usual, then <b>subtract the automa’s VP</b> from your score, to get your final score.",
+    "scoreTable": "The automa itself does not have a score: try to beat your own high score, or compare your score to this table:"
+  },
+  "sideBar": {
+    "round": "Age {round}"
+  },
+  "difficultyLevel": {
+    "1": "Normal - without 5-step war cards",
+    "2": "Hard - all war cards"
+  },
+  "age": {
+    "1": "Bronze age",
+    "2": "Iron age",
+    "3": "Medieval age",
+    "4": "Early modern age",
+    "5": "Industrial revolution age",
+    "6": "Late modern age",
+    "7": "Contemporary age",
+    "8": "Future age"
+  },
+  "player": {
+    "player": "Player",
+    "bot": "Automa"
+  },
+  "notfound": {
+    "title": "Not Found"
+  },
+  "action": {
+    "playGame": "Play Game",
+    "startGame": "Start Game",
+    "next": "Next",
+    "nextRound": "Next Round",
+    "abortGame": "Abort Game",
+    "abortGameConfirm": "Aborting the running game - are you sure?",
+    "endGame": "End Game",
+    "endGameConfirm": "End this game and return to home screen - are you sure?",
+    "cancel": "Cancel",
+    "backToHome": "Back to Home",
+    "back": "Back",
+    "close": "Close",
+    "ok": "OK",
+    "reset": "Reset"
+  },
+  "footer": {
+    "credits": "Credits"
+  },
+  "serviceWorkerUpdatedRefresh": {
+    "title": "Refresh Application",
+    "notice": "The application was updated - do you want to refresh to use the latest version?"
+  }
+}
