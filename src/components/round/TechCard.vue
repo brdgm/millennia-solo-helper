@@ -97,6 +97,9 @@ export default defineComponent({
   > .icon {
     width: 75px;
     margin-top: 10px;
+    @media (max-width: 600px) {
+      width: 65px;
+    }
   }
   .prosperity {
     position: absolute;

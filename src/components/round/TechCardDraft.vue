@@ -266,6 +266,14 @@ export default defineComponent({
     .number {
       bottom: 97px;
     }
+    @media (max-width: 600px) {
+      .icon {
+        bottom: 65px;
+      }
+      .number {
+        bottom: 82px;
+      }
+    }
   }
   .income2 {
     margin-left: -40px;
@@ -275,6 +283,17 @@ export default defineComponent({
     .number {
       bottom: 27px;
     }
+    @media (max-width: 600px) {
+      .icon {
+        bottom: 0px;
+      }
+      .number {
+        bottom: 17px;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    width: calc(4 * (70px + 10px) + 40px);
   }
 }
 .techCard {
@@ -284,5 +303,9 @@ export default defineComponent({
   height: 120px;
   margin-right: 10px;
   margin-bottom: 10px;
+  @media (max-width: 600px) {
+    width: 70px;
+    height: 100px;
+  }
 }
 </style>
