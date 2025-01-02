@@ -32,20 +32,7 @@
 
   <div class="draftedCards">
     <div v-if="playerTechs.length > 0" class="mt-3">
-      <h5>{{t('phaseADrafting.playerDraft')}}</h5>
-      <div class="techs">
-        <div class="techRow">
-          <div class="income1">
-            <AppIcon name="income" class="icon"/>
-            <div class="number">{{playerIncomeTotal}}</div>
-          </div>
-          <div class="income2" v-if="playerIncomeLockedTotal > 0">
-            <AppIcon name="income-lock" class="icon"/>
-            <div class="number">{{playerIncomeLockedTotal}}</div>
-          </div>
-          <TechCard v-for="tech of playerTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard"/>
-        </div>
-      </div>
+      <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="playerTechs"/>
     </div>
 
     <div v-if="botTechs.length > 0" class="mt-3">
@@ -72,11 +59,13 @@ import toTech from '@/util/toTech'
 import Player from '@/services/enum/Player'
 import TechCard from './TechCard.vue'
 import AppIcon from '../structure/AppIcon.vue'
+import TechCardsPlayerDraft from './TechCardsPlayerDraft.vue'
 
 export default defineComponent({
   name: 'TechCardDraft',
   components: {
     TechCard,
+    TechCardsPlayerDraft,
     AppIcon
   },
   setup(props) {
@@ -246,7 +235,7 @@ export default defineComponent({
 .techRow {
   display: flex;
   width: calc(4 * (80px + 10px) + 40px);
-  .income, .income1, .income2 {
+  .income {
     position: relative;
     width: 40px;
     .icon {
@@ -260,39 +249,6 @@ export default defineComponent({
       text-align: center;
       width: 34px;
       font-weight: bold;
-    }
-  }
-  .income1 {
-    .icon {
-      bottom: 80px;
-    }
-    .number {
-      bottom: 97px;
-    }
-    @media (max-width: 600px) {
-      .icon {
-        bottom: 65px;
-      }
-      .number {
-        bottom: 82px;
-      }
-    }
-  }
-  .income2 {
-    margin-left: -40px;
-    .icon {
-      bottom: 10px;
-    }
-    .number {
-      bottom: 27px;
-    }
-    @media (max-width: 600px) {
-      .icon {
-        bottom: 0px;
-      }
-      .number {
-        bottom: 17px;
-      }
     }
   }
   @media (max-width: 600px) {

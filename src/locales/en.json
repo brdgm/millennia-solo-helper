@@ -25,7 +25,7 @@
     "setup": {
       "gameBoard": "Setup the game the same way as a 2-player game.",
       "prosperityCards": "You do not need to set up the prosperity cards, they are managed and displayed by the application.",
-      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against Automa. After each drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
+      "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against the automa. After each drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
       "playerColor": "Choose a player color for the automa. The automa only needs 1 track marker and 1 VP marker.",
       "trackTokens": "Place the automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
       "startPlayer": {
@@ -47,7 +47,7 @@
   },
   "phaseADrafting": {
     "title": "A: Drafting",
-    "playerTurnSelect": "Please place your drafting marker on the board and select a tech card, or click on <i>Next</i> if you selected a special action.",
+    "playerTurnSelect": "Select a tech card, or use <i>Next</i> if you placed a marker on a special action.",
     "playerDraft": "Player draft",
     "botDraft": "Automa draft"
   },
@@ -64,7 +64,7 @@
     "remove": "Remove:",
     "pass": "Pass",
     "notAvailable": "Not Available",
-    "playerAction": "Buy a wonder or building and click on <i>Next</i>.<br/>Click on <i>Pass</i> to end the construction phase."
+    "playerAction": "Buy a wonder or building and use <i>Next</i>.<br/>Use <i>Pass</i> to end the construction phase."
   },
   "phaseEActions": {
     "title": "E: Actions",
