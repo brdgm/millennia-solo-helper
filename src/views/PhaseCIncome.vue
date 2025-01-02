@@ -6,15 +6,7 @@
   <p class="mt-4" v-html="t('phaseCIncome.skip')"></p>
 
   <div v-if="playerTechs.length > 0" class="mt-3">
-    <h5>{{t('phaseADrafting.playerDraft')}}</h5>
-    <div class="income1">
-      <AppIcon name="income" class="icon"/>
-      <div class="number">{{playerIncomeTotal}}</div>
-    </div>
-    <div class="income2" v-if="playerIncomeLockedTotal > 0">
-      <AppIcon name="income-lock" class="icon"/>
-      <div class="number">{{playerIncomeLockedTotal}}</div>
-    </div>
+    <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="playerTechs"/>
   </div>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
@@ -35,15 +27,15 @@ import { Round, useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import Tech from '@/services/enum/Tech'
-import AppIcon from '@/components/structure/AppIcon.vue'
 import DebugInfo from '@/components/round/DebugInfo.vue'
+import TechCardsPlayerDraft from '@/components/round/TechCardsPlayerDraft.vue'
 
 export default defineComponent({
   name: 'PhaseCIncome',
   components: {
     FooterButtons,
     SideBar,
-    AppIcon,
+    TechCardsPlayerDraft,
     DebugInfo
   },
   setup() {
