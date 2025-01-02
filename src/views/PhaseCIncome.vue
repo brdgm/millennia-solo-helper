@@ -52,17 +52,11 @@ export default defineComponent({
     backButtonRouteTo() : string {
       return `/round/${this.round}/prosperity`
     },
-    roundData() : Round {
-      return this.state.rounds.find(item => item.round == this.navigationState.round)!
+    roundData() : Round|undefined {
+      return this.state.rounds.find(item => item.round == this.navigationState.round)
     },
     playerTechs() : Tech[] {
-      return this.roundData.playerTechs ?? []
-    },
-    playerIncomeTotal() : number {
-      return this.playerTechs.map(tech => this.navigationState.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
-    },
-    playerIncomeLockedTotal() : number {
-      return this.playerTechs.map(tech => this.navigationState.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+      return this.roundData?.playerTechs ?? []
     }
   },
   methods: {
