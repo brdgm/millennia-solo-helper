@@ -72,21 +72,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.income1, .income2 {
-  position: relative;
-  width: 40px;
-  .icon {
-    width: 35px;
-    margin-bottom: 10px;
-  }
-  .number {
-    position: absolute;
-    bottom: 27px;
-    text-align: center;
-    width: 34px;
-    font-weight: bold;
-  }
-}
-</style>
