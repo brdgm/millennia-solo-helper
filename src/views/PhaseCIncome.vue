@@ -6,15 +6,7 @@
   <p class="mt-4" v-html="t('phaseCIncome.skip')"></p>
 
   <div v-if="playerTechs.length > 0" class="mt-3">
-    <h5>{{t('phaseADrafting.playerDraft')}}</h5>
-    <div class="income1">
-      <AppIcon name="income" class="icon"/>
-      <div class="number">{{playerIncomeTotal}}</div>
-    </div>
-    <div class="income2" v-if="playerIncomeLockedTotal > 0">
-      <AppIcon name="income-lock" class="icon"/>
-      <div class="number">{{playerIncomeLockedTotal}}</div>
-    </div>
+    <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="playerTechs"/>
   </div>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
@@ -35,15 +27,15 @@ import { Round, useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import Tech from '@/services/enum/Tech'
-import AppIcon from '@/components/structure/AppIcon.vue'
 import DebugInfo from '@/components/round/DebugInfo.vue'
+import TechCardsPlayerDraft from '@/components/round/TechCardsPlayerDraft.vue'
 
 export default defineComponent({
   name: 'PhaseCIncome',
   components: {
     FooterButtons,
     SideBar,
-    AppIcon,
+    TechCardsPlayerDraft,
     DebugInfo
   },
   setup() {
@@ -60,17 +52,11 @@ export default defineComponent({
     backButtonRouteTo() : string {
       return `/round/${this.round}/prosperity`
     },
-    roundData() : Round {
-      return this.state.rounds.find(item => item.round == this.navigationState.round)!
+    roundData() : Round|undefined {
+      return this.state.rounds.find(item => item.round == this.navigationState.round)
     },
     playerTechs() : Tech[] {
-      return this.roundData.playerTechs ?? []
-    },
-    playerIncomeTotal() : number {
-      return this.playerTechs.map(tech => this.navigationState.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
-    },
-    playerIncomeLockedTotal() : number {
-      return this.playerTechs.map(tech => this.navigationState.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+      return this.roundData?.playerTechs ?? []
     }
   },
   methods: {
@@ -80,21 +66,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.income1, .income2 {
-  position: relative;
-  width: 40px;
-  .icon {
-    width: 35px;
-    margin-bottom: 10px;
-  }
-  .number {
-    position: absolute;
-    bottom: 27px;
-    text-align: center;
-    width: 34px;
-    font-weight: bold;
-  }
-}
-</style>

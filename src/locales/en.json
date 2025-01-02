@@ -47,7 +47,7 @@
   },
   "phaseADrafting": {
     "title": "A: Drafting",
-    "playerTurnSelect": "Please place your drafting marker on the board and select a tech card, or click on <i>Next</i> if you selected a special action.",
+    "playerTurnSelect": "Select a tech card, or use <i>Next</i> if you placed a marker on a special action.",
     "playerDraft": "Player draft",
     "botDraft": "Automa draft"
   },
@@ -64,7 +64,7 @@
     "remove": "Remove:",
     "pass": "Pass",
     "notAvailable": "Not Available",
-    "playerAction": "Buy a wonder or building and click on <i>Next</i>.<br/>Click on <i>Pass</i> to end the construction phase."
+    "playerAction": "Buy a wonder or building and use <i>Next</i>.<br/>Use <i>Pass</i> to end the construction phase."
   },
   "phaseEActions": {
     "title": "E: Actions",
