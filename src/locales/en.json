@@ -85,7 +85,8 @@
   "endOfGame": {
     "title": "End Of Game",
     "finalScore": "Resolve the end-game as usual, then <b>subtract the automa’s VP</b> from your score, to get your final score.",
-    "scoreTable": "The automa itself does not have a score: try to beat your own high score, or compare your score to this table:"
+    "scoreTable": "The automa itself does not have a score: try to beat your own high score, or compare your score to this table:",
+    "vp": "{count} VP"
   },
   "sideBar": {
     "round": "Age {round}"
