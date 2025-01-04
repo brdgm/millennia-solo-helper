@@ -22,7 +22,7 @@
   <router-link to="/setupGame" class="btn btn-primary btn-lg mt-3">{{t('action.playGame')}}</router-link>
 
   <p class="disclaimer">
-    This is not an official Deep Print Games product and has no affiliation with <a href="https://karma-games.com/" target="_blank" rel="noopener">Karma Games</a>.
+    This is not an official Karma Games product and has no affiliation with <a href="https://karma-games.com/" target="_blank" rel="noopener">Karma Games</a>.
     All art in this app is from <a href="https://karma-games.com/millennia/" target="_blank" rel="noopener">Millennia</a>.
     See <a href="#" data-bs-toggle="modal" data-bs-target="#creditsModal">{{t('footer.credits')}}</a>.
     <a href="https://ko-fi.com/brdgm_me" target="_blank" rel="noopener"><img class="kofi-button" src="@/assets/kofi_button_dark.png" alt="Support me on Ko-fi"/></a>

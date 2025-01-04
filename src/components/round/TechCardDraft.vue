@@ -172,6 +172,9 @@ export default defineComponent({
       this.playerTurn = true
     },
     async playerDraftTech(tech: (Tech|TechPlaceholder)) {
+      if (this.removeAnimation) {
+        return
+      }
       const t = toTech(tech)
       if (!t) {
         return
