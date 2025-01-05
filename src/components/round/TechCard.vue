@@ -1,6 +1,6 @@
 <template>
-  <div class="tech"
-      :style="{backgroundColor:getColor(tech)}">
+  <div class="tech">
+    <AppIcon :type="`tech-illustration-age${navigationState.round}`" :name="tech" class="background"/>
     <AppIcon type="tech" :name="tech" class="icon"/>
     <div class="prosperity" v-if="isProsperity(tech)">
       <AppIcon name="prosperity" class="icon"/>
@@ -15,11 +15,12 @@
       <AppIcon name="unlock-income" class="icon"/>
     </div>
     <div class="marker" v-if="isCommunication(tech)">
-      <AppIcon name="prosperity-money" class="icon communication"/>
+      <AppIcon name="prosperity-money" class="icon"/>
     </div>
     <div class="durations">
       <div class="duration" v-for="duration of getDuration(tech)" :key="duration" :style="{'z-index':100-duration}"><div>{{duration + round - 1}}</div></div>
     </div>
+    <div class="bottom" :style="{backgroundColor:getColor(tech)}"></div>
   </div>
 </template>
 
@@ -95,35 +96,34 @@ export default defineComponent({
     transform: rotateY(180deg);
   }
   > .icon {
-    width: 75px;
-    margin-top: 10px;
+    position: absolute;
+    width: 40px;
+    left: 5px;
+    bottom: 5px;
     @media (max-width: 600px) {
-      width: 65px;
+      width: 35px;
     }
   }
   .prosperity {
     position: absolute;
     left: 5px;
-    top: 5px;
+    top: 1px;
     > .icon {
-      width: 25px;
+      width: 22px;
       filter: drop-shadow(1px 1px 1px #444);
+      @media (max-width: 600px) {
+        max-width: 20px;
+      }
     }
   }
   .marker {
     position: absolute;
-    left: 5px;
-    bottom: 5px;
+    top: 5px;
+    right: 5px;
     > .icon {
       max-width: 35px;
       max-height: 30px;
       filter: drop-shadow(1px 1px 1px #444);
-      &.communication {
-        max-width: 42px;
-        @media (max-width: 600px) {
-          max-width: 34px;
-        }
-      }
     }
   }
   .durations {
@@ -146,6 +146,26 @@ export default defineComponent({
       margin-top: -4px;
       filter: drop-shadow(1px 1px 1px #444);
     }
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    z-index: -100;
+  }
+  .bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 25px;
+    z-index: -90;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 }
 </style>
