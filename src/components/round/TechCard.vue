@@ -15,7 +15,7 @@
       <AppIcon name="unlock-income" class="icon"/>
     </div>
     <div class="marker" v-if="isCommunication(tech)">
-      <AppIcon name="prosperity-money" class="icon"/>
+      <AppIcon name="prosperity-money" class="icon communication"/>
     </div>
     <div class="durations">
       <div class="duration" v-for="duration of getDuration(tech)" :key="duration" :style="{'z-index':100-duration}"><div>{{duration + round - 1}}</div></div>
@@ -118,6 +118,12 @@ export default defineComponent({
       max-width: 35px;
       max-height: 30px;
       filter: drop-shadow(1px 1px 1px #444);
+      &.communication {
+        max-width: 42px;
+        @media (max-width: 600px) {
+          max-width: 34px;
+        }
+      }
     }
   }
   .durations {

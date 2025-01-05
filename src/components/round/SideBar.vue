@@ -112,7 +112,7 @@ export default defineComponent({
       width: 100%;
       padding: 1px;
       justify-content: center;
-      background-color: #ee994a;
+      background-color: #f39c40;
       .icon {
         width: 50px;
       }
