@@ -8,33 +8,9 @@
     <div class="col-10 offset-1 col-sm-8 col-md-6 col-lg-4">
       <table class="table table">
         <tbody>
-          <tr>
-            <th scope="row">★</th>
-            <td>100 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★</th>
-            <td>120 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★★</th>
-            <td>150 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★★★</th>
-            <td>175 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★★★★</th>
-            <td>200 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★★★★★</th>
-            <td>225 VP</td>
-          </tr>
-          <tr>
-            <th scope="row">★★★★★★★</th>
-            <td>250 VP</td>
+          <tr v-for="(vp,index) of starVP" :key="index">
+            <th scope="row"><span v-for="star of (index+1)" :key="star">★</span></th>
+            <td>{{t(`endOfGame.vp`, {count:vp})}}</td>
           </tr>
         </tbody>
       </table>
@@ -64,6 +40,9 @@ export default defineComponent({
   computed: {
     backButtonRouteTo() : string {
       return `/round/8/war`
+    },
+    starVP() : number[] {
+      return [100, 120, 150, 175, 200, 225, 250]
     }
   }
 })
