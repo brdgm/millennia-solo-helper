@@ -146,7 +146,7 @@ export default defineComponent({
       else if (this.playerMarkerPlaced < this.botMarkerPlaced) {
         await this.nextTurnPlayer()
       }
-      else if (this.navigationState.startPlayer == Player.BOT) {
+      else if (this.roundData.startPlayer == Player.BOT) {
         await this.nextTurnBot()
       }
       else {
