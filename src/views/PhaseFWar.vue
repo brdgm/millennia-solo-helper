@@ -16,7 +16,6 @@
     <ul v-if="round==8">
       <li v-html="t('phaseFWar.resolveLastRound')"></li>
     </ul>
-    <li v-html="t('phaseFWar.trackVP')"></li>
   </ul>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
