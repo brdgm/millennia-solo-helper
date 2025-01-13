@@ -27,7 +27,7 @@
       "prosperityCards": "You do not need to set up the prosperity cards, they are managed and displayed by the application.",
       "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against the automa. After each drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
       "playerColor": "Choose a player color for the automa. The automa only needs 1 track marker and 1 VP marker.",
-      "trackTokens": "Place the automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 10 VP).",
+      "trackTokens": "Place the automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 0 VP).",
       "startPlayer": {
         "player": "<b>You</b> are the start player. Take 10 Gold. Take the first player token.",
         "bot": "<b>Automa</b> is the start player. Give it the first player token."
@@ -73,10 +73,9 @@
   "phaseFWar": {
     "title": "F: War",
     "advance": "Automa advances {steps} steps on the war track.",
-    "outmax": "If the automa maxes out the war track, it gains 1 VP per step beyond 7.",
+    "outmax": "If the automa maxes out the war track, it gains 3 VP per step beyond 7.",
     "resolve": "Then the war phase is resolved normally.",
-    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power.",
-    "trackVP": "Track the VP the automa gains during the war phase on the VP track. "
+    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power."
   },
   "phaseGUpkeep": {
     "title": "G: Upkeep",

@@ -8,6 +8,9 @@
     <div class="marker" v-if="isArmy(tech)">
       <AppIcon name="first-player-token" class="icon"/>
     </div>
+    <div class="marker" v-if="isArmyLastRound(tech)">
+      <AppIcon name="victory-point-1" class="icon"/>
+    </div>
     <div class="marker" v-if="isEngineering(tech)">
       <AppIcon name="architect-token" class="icon"/>
     </div>
@@ -54,7 +57,10 @@ export default defineComponent({
   },
   methods: {
     isArmy(tech: Tech) : boolean {
-      return tech == Tech.ARMY
+      return tech == Tech.ARMY && this.navigationState.round != 8
+    },
+    isArmyLastRound(tech: Tech) : boolean {
+      return tech == Tech.ARMY && this.navigationState.round == 8
     },
     isEngineering(tech: Tech) : boolean {
       return tech == Tech.ENGINEERING
