@@ -1,8 +1,8 @@
 {
-  "gameTitle": "Millennia",
+  "gameTitle": "Millennia: Tracks of Time",
   "home": {
-    "title": "Millennia Solo Helper",
-    "play1": "Play <a href='https://boardgamegeek.com/boardgame/356883/millennia' target='_blank' rel='noopener'><b>Millennia</b></a> against Automa, the solo opponent.",
+    "title": "Millennia: Tracks of Time Solo Helper",
+    "play1": "Play <a href='https://boardgamegeek.com/boardgame/356883/millennia' target='_blank' rel='noopener'><b>Millennia: Tracks of Time</b></a> against Automa, the solo opponent.",
     "play2": "This application replaces the Automa cards, and guides you through the game flow. Additionally, it automates the tech card drafting and prosperity card selection.",
     "feedback": "Discussion and Feedback:"
   },
