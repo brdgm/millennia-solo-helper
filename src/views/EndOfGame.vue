@@ -3,6 +3,8 @@
 
   <p v-html="t('endOfGame.finalScore')"></p>
 
+  <p v-html="t('endOfGame.subtractBotScore')"></p>
+
   <p v-html="t('endOfGame.scoreTable')"></p>
   <div class="row">
     <div class="col-10 offset-1 col-sm-8 col-md-6 col-lg-4">
