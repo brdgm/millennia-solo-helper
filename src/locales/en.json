@@ -76,7 +76,7 @@
     "advance": "Automa advances {steps} steps on the war track.",
     "outmax": "If the Automa maxes out the war track, it gains 3 VP per step beyond 7.",
     "resolve": "Move the war track markers back an equal number of steps until the lowest marker returns to zero.",
-    "resolveLastRound": "<i>Last Round</i>: Do not reduce war power."
+    "resolveLastRound": "<i>Last Age</i>: Do not move the war track markers."
   },
   "phaseGUpkeep": {
     "title": "G: Upkeep",
@@ -116,7 +116,6 @@
     "playGame": "Play Game",
     "startGame": "Start Game",
     "next": "Next",
-    "nextRound": "Next Round",
     "abortGame": "Abort Game",
     "abortGameConfirm": "Aborting the running game - are you sure?",
     "endGame": "End Game",

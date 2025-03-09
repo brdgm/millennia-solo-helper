@@ -66,6 +66,7 @@ import Player from '@/services/enum/Player'
 import TechCard from './TechCard.vue'
 import AppIcon from '../structure/AppIcon.vue'
 import TechCardsPlayerDraft from './TechCardsPlayerDraft.vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'TechCardDraft',
@@ -77,13 +78,14 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     const state = useStateStore()
+    const router = useRouter();
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
     const botTechs = ref(roundData.botTechs ?? [])
     const playerTechs = ref(roundData.playerTechs ?? [])
     const playerSpecialActions = ref(roundData.playerSpecialActions ?? 0)
 
-    return { t, state, roundData, botTechs, playerTechs, playerSpecialActions }
+    return { t, state, router, roundData, botTechs, playerTechs, playerSpecialActions }
   },
   props: {
     navigationState: {
@@ -217,7 +219,7 @@ export default defineComponent({
     },
     async next() {
       if (this.draftingCompleted) {
-        this.$router.push(this.nextButtonRouteTo)
+        this.router.push(this.nextButtonRouteTo)
       }
       else {
         this.playerSpecialActions++
