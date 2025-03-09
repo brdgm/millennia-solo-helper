@@ -17,7 +17,13 @@
     </div>
   </div>
 
-  <div class="row" v-if="playerTurn">
+  <div class="row" style="width:fit-content" v-if="botRound8Army">
+    <div class="col">
+      <div class="alert alert-warning" v-html="t('phaseADrafting.botRound8Army')"></div>
+    </div>
+  </div>
+
+  <div class="row" style="width:fit-content" v-if="playerTurn">
     <div class="col">
       <div class="alert alert-primary" v-html="t('phaseADrafting.playerTurnSelect')"></div>
     </div>
@@ -60,6 +66,7 @@ import Player from '@/services/enum/Player'
 import TechCard from './TechCard.vue'
 import AppIcon from '../structure/AppIcon.vue'
 import TechCardsPlayerDraft from './TechCardsPlayerDraft.vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'TechCardDraft',
@@ -71,13 +78,14 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     const state = useStateStore()
+    const router = useRouter();
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
     const botTechs = ref(roundData.botTechs ?? [])
     const playerTechs = ref(roundData.playerTechs ?? [])
     const playerSpecialActions = ref(roundData.playerSpecialActions ?? 0)
 
-    return { t, state, roundData, botTechs, playerTechs, playerSpecialActions }
+    return { t, state, router, roundData, botTechs, playerTechs, playerSpecialActions }
   },
   props: {
     navigationState: {
@@ -113,6 +121,9 @@ export default defineComponent({
     },
     playerIncomeLockedTotal() : number {
       return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+    },
+    botRound8Army() : boolean {
+      return this.navigationState.round == 8 && this.botTechs.includes(Tech.ARMY)
     }
   },
   methods: {
@@ -208,7 +219,7 @@ export default defineComponent({
     },
     async next() {
       if (this.draftingCompleted) {
-        this.$router.push(this.nextButtonRouteTo)
+        this.router.push(this.nextButtonRouteTo)
       }
       else {
         this.playerSpecialActions++

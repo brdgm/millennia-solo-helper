@@ -1,5 +1,5 @@
 <template>
-  <div class="row" v-if="playerTurn">
+  <div class="row" style="width:fit-content" v-if="playerTurn">
     <div class="col">
       <div class="alert alert-primary" v-html="t('phaseDConstruction.playerAction')"></div>
     </div>
@@ -40,6 +40,7 @@ import NavigationState from '@/util/NavigationState'
 import AppIcon from '../structure/AppIcon.vue'
 import Player from '@/services/enum/Player'
 import ConstructionCard from '@/services/ConstructionCard'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'ConstructionDraft',
@@ -49,6 +50,7 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     const state = useStateStore()
+    const router = useRouter()
 
     const architectPlayer = props.navigationState.architectPlayer
     const botTurn = ref(architectPlayer == Player.BOT)
@@ -59,7 +61,7 @@ export default defineComponent({
       constructionCard.value = props.navigationState.botCards.construction.draw()
     }
 
-    return { t, state, botTurn, playerTurn, constructionCard }
+    return { t, router, state, botTurn, playerTurn, constructionCard }
   },
   props: {
     navigationState: {
@@ -97,7 +99,7 @@ export default defineComponent({
       this.nextTurnBot()
     },
     pass() : void {
-      this.$router.push(this.nextButtonRouteTo)
+      this.router.push(this.nextButtonRouteTo)
     }
   }
 })

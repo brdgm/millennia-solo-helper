@@ -12,10 +12,8 @@
   <ul>
     <li v-html="t('phaseFWar.advance', {steps:warTrackAdvanceSteps})"></li>
     <li v-html="t('phaseFWar.outmax')"></li>
-    <li v-html="t('phaseFWar.resolve')"></li>
-    <ul v-if="round==8">
-      <li v-html="t('phaseFWar.resolveLastRound')"></li>
-    </ul>
+    <li v-if="round<8" v-html="t('phaseFWar.resolve')"></li>
+    <li v-else v-html="t('phaseFWar.resolveLastRound')"></li>
   </ul>
 
   <button class="btn btn-primary btn-lg mt-4" @click="next()">
@@ -31,7 +29,7 @@
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
@@ -48,6 +46,7 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n()
+    const router = useRouter()
     const route = useRoute()
     const state = useStateStore()
 
@@ -56,7 +55,7 @@ export default defineComponent({
 
     const warTrackAdvanceSteps = navigationState.botCards.war.currentCard?.warAdvance ?? 0
 
-    return { t, state, navigationState, round, warTrackAdvanceSteps }
+    return { t, router, state, navigationState, round, warTrackAdvanceSteps }
   },
   computed: {
     backButtonRouteTo() : string {
@@ -66,10 +65,10 @@ export default defineComponent({
   methods: {
     next() : void {
       if (this.round == 8) {
-        this.$router.push(`/endOfGame`)
+        this.router.push(`/endOfGame`)
       }
       else {
-        this.$router.push(`/round/${this.round}/upkeep`)
+        this.router.push(`/round/${this.round}/upkeep`)
       }
     }
   }
