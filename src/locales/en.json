@@ -84,8 +84,9 @@
   },
   "endOfGame": {
     "title": "End Of Game",
-    "finalScore": "Resolve the end-game as usual, then <b>subtract the automa’s VP</b> from your score, to get your final score.",
-    "scoreTable": "The Automa itself does not have a score: try to beat your own high score, or compare your score to this table:",
+    "finalScore": "Resolve your end-game scoring as usual. The <b>Automa scores VP only for the war track</b>.",
+    "subtractBotScore": "Then <b>subtract the Automa’s VP</b> from your score, to get your final score.",
+    "scoreTable": "The Automa itself does not have a score - try to beat your own high score, or compare your score to this table:",
     "vp": "{count} VP"
   },
   "sideBar": {
