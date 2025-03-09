@@ -17,13 +17,13 @@
     </div>
   </div>
 
-  <div class="row" v-if="botRound8Army">
+  <div class="row" style="width:fit-content" v-if="botRound8Army">
     <div class="col">
       <div class="alert alert-warning" v-html="t('phaseADrafting.botRound8Army')"></div>
     </div>
   </div>
 
-  <div class="row" v-if="playerTurn">
+  <div class="row" style="width:fit-content" v-if="playerTurn">
     <div class="col">
       <div class="alert alert-primary" v-html="t('phaseADrafting.playerTurnSelect')"></div>
     </div>
