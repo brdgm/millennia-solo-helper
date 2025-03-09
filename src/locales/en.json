@@ -42,7 +42,7 @@
       "noGold": "The Automa never has nor gains any gold.",
       "noActions": "The Automa does not perform any actions in the action phase;",
       "onlyWarTrack": "The Automa only advances on the war track and the VP track.",
-      "noVP": "The Automa does not gain any VP except from scoring the war track at the end of the game."
+      "noVP": "The Automa does not gain any VP except from the war track (by maxing out and by scoring at the end of the game)."
     }
   },
   "phaseADrafting": {
