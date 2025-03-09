@@ -17,6 +17,12 @@
     </div>
   </div>
 
+  <div class="row" v-if="botRound8Army">
+    <div class="col">
+      <div class="alert alert-warning" v-html="t('phaseADrafting.botRound8Army')"></div>
+    </div>
+  </div>
+
   <div class="row" v-if="playerTurn">
     <div class="col">
       <div class="alert alert-primary" v-html="t('phaseADrafting.playerTurnSelect')"></div>
@@ -113,6 +119,9 @@ export default defineComponent({
     },
     playerIncomeLockedTotal() : number {
       return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+    },
+    botRound8Army() : boolean {
+      return this.navigationState.round == 8 && this.botTechs.includes(Tech.ARMY)
     }
   },
   methods: {

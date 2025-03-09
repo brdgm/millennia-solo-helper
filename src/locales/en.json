@@ -47,9 +47,10 @@
   },
   "phaseADrafting": {
     "title": "A: Drafting",
-    "playerTurnSelect": "Select a tech card, or use <i>Next</i> if you placed a marker on a special action.",
     "playerDraft": "Player draft",
-    "botDraft": "Automa draft"
+    "botDraft": "Automa draft",
+    "playerTurnSelect": "Select a tech card, or use <i>Next</i> if you placed a marker on a special action.",
+    "botRound8Army": "The Automa drafted the Army tech and gains <b>1 VP</b>."
   },
   "phaseBProsperity": {
     "title": "B: Prosperity",
