@@ -1,6 +1,6 @@
 {
   "name": "@brdgm/millennia-solo-helper",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": true,
   "description": "Millennia: Tracks of Time Solo Helper",
   "appDeployName": "millennia",
