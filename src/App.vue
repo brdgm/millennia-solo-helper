@@ -26,7 +26,7 @@
 
   <ModalDialog id="creditsModal" :title="t('footer.credits')">
     <template #body>
-      <h4><a href="https://boardgamegeek.com/image/7618191/millennia" target="_blank" rel="noopener">{{t('gameTitle')}}</a></h4>
+      <h4><a href="https://boardgamegeek.com/boardgame/356883/millennia-tracks-of-time" target="_blank" rel="noopener">{{t('gameTitle')}}</a></h4>
       <dl>
         <dt>Game design</dt>
         <dd>Mike Georgiou, Orestis Leontaritis</dd>

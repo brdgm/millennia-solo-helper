@@ -1,7 +1,7 @@
 <template>
 
   <div class="float-end m-2 w-25">
-    <a href="https://boardgamegeek.com/image/7618191/millennia" target="_blank" rel="noopener">
+    <a href="https://boardgamegeek.com/boardgame/356883/millennia-tracks-of-time" target="_blank" rel="noopener">
       <img src="../assets/game-millennia.webp" class="rounded shadow w-100 mb-3" alt=""/>
     </a>
   </div>
