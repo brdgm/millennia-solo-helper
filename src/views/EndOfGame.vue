@@ -44,7 +44,7 @@ export default defineComponent({
       return `/round/8/war`
     },
     starVP() : number[] {
-      return [100, 120, 150, 175, 200, 225, 250]
+      return [150, 175, 200, 225, 250, 275, 300]
     }
   }
 })
