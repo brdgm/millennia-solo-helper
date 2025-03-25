@@ -82,11 +82,17 @@
     "title": "G: Upkeep",
     "skip": "Automa skips this phase."
   },
+  "endOfGameAmounts": {
+    "title": "End Of Game: Amounts",
+    "vp": "VP",
+    "steps": "Steps",
+    "count": "Count",
+    "amount": "Amount"
+  },
   "endOfGame": {
     "title": "End Of Game",
-    "finalScore": "Resolve your end-game scoring as usual. The <b>Automa scores VP only for the war track</b>.",
-    "subtractBotScore": "Then <b>subtract the Automa’s VP</b> from your score, to get your final score.",
-    "scoreTable": "The Automa itself does not have a score - try to beat your own high score, or compare your score to this table:",
+    "finalScore": "Automa’s VP is subtracted from your score, your final score is:",
+    "scoreTable": "Compare your score to this table:",
     "vp": "{count} VP"
   },
   "sideBar": {

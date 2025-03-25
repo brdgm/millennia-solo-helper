@@ -19,6 +19,7 @@ export const useStateStore = defineStore(`${name}.state`, {
   actions: {
     resetGame() {
       this.rounds = []
+      this.finalScoringAmount = undefined
     },
     storeRound(round : Round) {
       this.rounds = this.rounds.filter(item => item.round < round.round)
@@ -33,6 +34,7 @@ export interface State {
   baseFontSize: number
   setup: Setup
   rounds: Round[]
+  finalScoringAmount?: FinalScoringAmount
 }
 export interface Setup {
   difficultyLevel: DifficultyLevel
@@ -76,4 +78,18 @@ export interface RowPlaceholdersPersistence {
 export interface TechCardSelectionPersistence {
   techs: (Tech|TechPlaceholder)[][]
   removedTechs: (Tech|TechPlaceholder)[]
+}
+
+export interface FinalScoringAmount {
+  scoringTrackVP: number[]
+  prosperityVP: number[]
+  populationVP: number[]
+  cultureVP: number[]
+  influenceSteps: number[]
+  politicsSteps: number[]
+  warSteps: number[]
+  wonderVPs: number[]
+  yellowBuildingVPs: number[]
+  diplomacyCardCount: number[]
+  money: number[]
 }
