@@ -14,7 +14,7 @@
         </tr>
         <tr>
           <th scope="row">
-            <AppIcon type="final-scoring" name="scoring-track" class="icon wide"/>
+            <AppIcon type="final-scoring" name="scoring-track" class="icon"/>
           </th>
           <td v-for="index in playerCount" :key="index">
             {{toNumber(amount.scoringTrackVP[index-1])}}
@@ -225,16 +225,11 @@ export default defineComponent({
   }
 }
 .icon {
-  width: 2.5rem;
   height: 2.5rem;
-  object-fit: contain;
   margin-right: 0.25rem;
   &.small {
     width: 2rem;
     height: 2rem;
-  }
-  &.wide {
-    width: 3.5rem;
   }
 }
 .table-wrapper {
