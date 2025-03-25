@@ -13,6 +13,7 @@ import PhaseEActions from '@/views/PhaseEActions.vue'
 import PhaseFWar from '@/views/PhaseFWar.vue'
 import PhaseGUpkeep from '@/views/PhaseGUpkeep.vue'
 import EndOfGame from '@/views/EndOfGame.vue'
+import EndOfGameAmounts from '@/views/EndOfGameAmounts.vue'
 
 const LOCALSTORAGE_KEY = `${name}.route`
 
@@ -66,6 +67,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/round/:round/upkeep',
     name: 'PhaseGUpkeep',
     component: PhaseGUpkeep
+  },
+  {
+    path: '/endOfGameAmounts',
+    name: 'EndOfGameAmounts',
+    component: EndOfGameAmounts
   },
   {
     path: '/endOfGame',
