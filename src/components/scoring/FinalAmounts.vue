@@ -17,7 +17,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
-          <input type="number" min="0" max="20" step="1" v-model="amount.scoringTrackVP[index-1]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.scoringTrackVP[index-1]" @focus="inputSelectAll"/>
         </td>
       </tr>
       <tr>
@@ -26,7 +26,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.prosperityVP[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.prosperityVP[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -36,7 +36,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.populationVP[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.populationVP[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -46,7 +46,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.cultureVP[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.cultureVP[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -56,7 +56,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.influenceSteps[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.influenceSteps[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -66,7 +66,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.politicsSteps[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.politicsSteps[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -76,7 +76,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
-          <input type="number" min="0" max="20" step="1" v-model="amount.warSteps[index-1]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.warSteps[index-1]" @focus="inputSelectAll"/>
         </td>
       </tr>
       <tr>
@@ -85,7 +85,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.wonderVPs[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.wonderVPs[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -95,7 +95,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.yellowBuildingVPs[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.yellowBuildingVPs[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
@@ -105,7 +105,7 @@
           <span v-html="t('endOfGameAmounts.count')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.diplomacyCardCount[0]" @focus="inputSelectAll"/>
+          <input type="number" min="0" step="1" v-model="amount.diplomacyCardCount[0]" @focus="inputSelectAll"/>
         </td>
         <td></td>
       </tr>
