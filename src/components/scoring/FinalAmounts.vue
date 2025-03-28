@@ -109,16 +109,6 @@
         </td>
         <td></td>
       </tr>
-      <tr>
-        <th scope="row">
-          <AppIcon type="final-scoring" name="money" class="icon small"/>
-          <span v-html="t('endOfGameAmounts.amount')"></span>
-        </th>
-        <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.money[0]" @focus="inputSelectAll"/>
-        </td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
 
@@ -156,8 +146,7 @@ export default defineComponent({
         warSteps: [],
         wonderVPs: [],
         yellowBuildingVPs: [],
-        diplomacyCardCount: [],
-        money: []
+        diplomacyCardCount: []
       } as FinalScoringAmount
 
     const playerCount = 2
