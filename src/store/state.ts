@@ -91,5 +91,4 @@ export interface FinalScoringAmount {
   wonderVPs: number[]
   yellowBuildingVPs: number[]
   diplomacyCardCount: number[]
-  money: number[]
 }

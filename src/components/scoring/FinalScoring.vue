@@ -97,16 +97,6 @@
         </tr>
         <tr>
           <th scope="row">
-            <AppIcon type="final-scoring" name="money" class="icon"/>
-            <span>7:1</span>
-          </th>
-          <td>
-            {{Math.floor(toNumber(amount.money[0]) / 7)}}
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
             <AppIcon type="final-scoring" name="total" class="icon small"/>
           </th>
           <td v-for="index in playerCount" :key="index">
@@ -171,7 +161,6 @@ export default defineComponent({
             + this.toNumber(this.amount.wonderVPs[i])
             + this.toNumber(this.amount.yellowBuildingVPs[i])
             + (this.toNumber(this.amount.diplomacyCardCount[i]) * 3)
-            + Math.floor(this.toNumber(this.amount.money[i]) / 7)
       }
       return result
     },
