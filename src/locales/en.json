@@ -83,14 +83,14 @@
     "skip": "Automa skips this phase."
   },
   "endOfGameAmounts": {
-    "title": "End Of Game: Amounts",
+    "title": "End of Game: Amounts",
     "vp": "VP",
     "steps": "Steps",
     "count": "Count",
     "amount": "Amount"
   },
   "endOfGame": {
-    "title": "End Of Game",
+    "title": "End of Game",
     "finalScore": "Automa’s VP is subtracted from your score, your final score is:",
     "scoreTable": "Compare your score to this table:",
     "vp": "{count} VP"
