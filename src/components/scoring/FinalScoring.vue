@@ -216,6 +216,7 @@ export default defineComponent({
 .icon {
   height: 2.5rem;
   margin-right: 0.25rem;
+  object-fit: contain;
   &.small {
     width: 2rem;
     height: 2rem;

@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <th scope="row">
-          <AppIcon type="final-scoring" name="scoring-track" class="icon small"/>
+          <AppIcon type="final-scoring" name="scoring-track" class="icon"/>
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
@@ -178,6 +178,7 @@ export default defineComponent({
 .icon {
   height: 2.5rem;
   margin-right: 0.25rem;
+  object-fit: contain;
   &.small {
     width: 2rem;
     height: 2rem;
