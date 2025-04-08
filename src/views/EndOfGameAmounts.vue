@@ -26,7 +26,7 @@ export default defineComponent({
   },
   computed: {
     backButtonRouteTo() : string {
-      return '/round/5/scoring'
+      return '/round/8/war'
     }
   }
 })
