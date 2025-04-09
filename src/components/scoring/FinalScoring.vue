@@ -97,16 +97,6 @@
         </tr>
         <tr>
           <th scope="row">
-            <AppIcon type="final-scoring" name="money" class="icon"/>
-            <span>7:1</span>
-          </th>
-          <td>
-            {{Math.floor(toNumber(amount.money[0]) / 7)}}
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">
             <AppIcon type="final-scoring" name="total" class="icon small"/>
           </th>
           <td v-for="index in playerCount" :key="index">
@@ -138,6 +128,7 @@ import { useStateStore, FinalScoringAmount } from '@/store/state'
 import { defineComponent, PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '../structure/AppIcon.vue'
+import toNumber from '@brdgm/brdgm-commons/src/util/form/toNumber'
 
 export default defineComponent({
   name: 'FinalScoring',
@@ -162,16 +153,15 @@ export default defineComponent({
     totalVP() : number[] {
       const result = []
       for (let i=0; i<this.playerCount; i++) {
-        result[i] = this.toNumber(this.amount.scoringTrackVP[i])
-            + this.toNumber(this.amount.prosperityVP[i])
-            + this.toNumber(this.amount.populationVP[i])
-            + this.toNumber(this.amount.cultureVP[i])
-            + (this.toNumber(this.amount.influenceSteps[i]) * this.toNumber(this.amount.politicsSteps[i]))
-            + (this.toNumber(this.amount.warSteps[i]) * 2)
-            + this.toNumber(this.amount.wonderVPs[i])
-            + this.toNumber(this.amount.yellowBuildingVPs[i])
-            + (this.toNumber(this.amount.diplomacyCardCount[i]) * 3)
-            + Math.floor(this.toNumber(this.amount.money[i]) / 7)
+        result[i] = toNumber(this.amount.scoringTrackVP[i])
+            + toNumber(this.amount.prosperityVP[i])
+            + toNumber(this.amount.populationVP[i])
+            + toNumber(this.amount.cultureVP[i])
+            + (toNumber(this.amount.influenceSteps[i]) * toNumber(this.amount.politicsSteps[i]))
+            + (toNumber(this.amount.warSteps[i]) * 2)
+            + toNumber(this.amount.wonderVPs[i])
+            + toNumber(this.amount.yellowBuildingVPs[i])
+            + (toNumber(this.amount.diplomacyCardCount[i]) * 3)
       }
       return result
     },
@@ -191,14 +181,7 @@ export default defineComponent({
     }
   },
   methods: {
-    toNumber(value? : number) {
-      if (typeof value == 'string') {
-        return 0
-      }
-      else {
-        return value ?? 0
-      }
-    }
+    toNumber
   }
 })
 </script>
@@ -227,6 +210,7 @@ export default defineComponent({
 .icon {
   height: 2.5rem;
   margin-right: 0.25rem;
+  object-fit: contain;
   &.small {
     width: 2rem;
     height: 2rem;

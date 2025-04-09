@@ -34,8 +34,7 @@ export default defineComponent({
         warSteps: [],
         wonderVPs: [],
         yellowBuildingVPs: [],
-        diplomacyCardCount: [],
-        money: []
+        diplomacyCardCount: []
       } as FinalScoringAmount
 
     return { t, state, amount }

@@ -13,11 +13,11 @@
       </tr>
       <tr>
         <th scope="row">
-          <AppIcon type="final-scoring" name="scoring-track" class="icon small"/>
+          <AppIcon type="final-scoring" name="scoring-track" class="icon"/>
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
-          <input type="number" min="0" max="20" step="1" v-model="amount.scoringTrackVP[index-1]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.scoringTrackVP[index-1]"/>
         </td>
       </tr>
       <tr>
@@ -26,7 +26,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.prosperityVP[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.prosperityVP[0]" :max="35"/>
         </td>
         <td></td>
       </tr>
@@ -36,7 +36,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.populationVP[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.populationVP[0]" :max="20"/>
         </td>
         <td></td>
       </tr>
@@ -46,7 +46,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.cultureVP[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.cultureVP[0]" :max="20"/>
         </td>
         <td></td>
       </tr>
@@ -56,7 +56,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.influenceSteps[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.influenceSteps[0]" :max="5"/>
         </td>
         <td></td>
       </tr>
@@ -66,7 +66,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.politicsSteps[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.politicsSteps[0]" :max="10"/>
         </td>
         <td></td>
       </tr>
@@ -76,7 +76,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
-          <input type="number" min="0" max="20" step="1" v-model="amount.warSteps[index-1]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.warSteps[index-1]" :max="7"/>
         </td>
       </tr>
       <tr>
@@ -85,7 +85,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.wonderVPs[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.wonderVPs[0]"/>
         </td>
         <td></td>
       </tr>
@@ -95,7 +95,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.yellowBuildingVPs[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.yellowBuildingVPs[0]"/>
         </td>
         <td></td>
       </tr>
@@ -105,17 +105,7 @@
           <span v-html="t('endOfGameAmounts.count')"></span>
         </th>
         <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.diplomacyCardCount[0]" @focus="inputSelectAll"/>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">
-          <AppIcon type="final-scoring" name="money" class="icon small"/>
-          <span v-html="t('endOfGameAmounts.amount')"></span>
-        </th>
-        <td>
-          <input type="number" min="0" max="20" step="1" v-model="amount.money[0]" @focus="inputSelectAll"/>
+          <ScoringTextInput v-model="amount.diplomacyCardCount[0]"/>
         </td>
         <td></td>
       </tr>
@@ -134,11 +124,13 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '../structure/AppIcon.vue'
 import { useRouter } from 'vue-router'
+import ScoringTextInput from '@brdgm/brdgm-commons/src/components/form/ScoringTextInput.vue'
 
 export default defineComponent({
   name: 'FinalAmounts',
   components: {
-    AppIcon
+    AppIcon,
+    ScoringTextInput
   },
   setup() {
     const { t } = useI18n()
@@ -156,8 +148,7 @@ export default defineComponent({
         warSteps: [],
         wonderVPs: [],
         yellowBuildingVPs: [],
-        diplomacyCardCount: [],
-        money: []
+        diplomacyCardCount: []
       } as FinalScoringAmount
 
     const playerCount = 2
@@ -165,21 +156,9 @@ export default defineComponent({
     return { t, state, router, amount, playerCount }
   },
   methods: {
-    inputSelectAll(event: Event) : void {
-      const input = event.target as HTMLInputElement
-      input.select()
-    },
-    toNumber(value? : number) {
-      if (typeof value == 'string') {
-        return 0
-      }
-      else {
-        return value ?? 0
-      }
-    },
     next() : void {
       this.state.finalScoringAmount = this.amount
-      this.router.push(`/endOfGame`)
+      this.router.push('/endOfGame')
     }
   }
 })
@@ -189,6 +168,7 @@ export default defineComponent({
 .icon {
   height: 2.5rem;
   margin-right: 0.25rem;
+  object-fit: contain;
   &.small {
     width: 2rem;
     height: 2rem;
