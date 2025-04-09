@@ -26,7 +26,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <ScoringTextInput v-model="amount.prosperityVP[0]"/>
+          <ScoringTextInput v-model="amount.prosperityVP[0]" :max="35"/>
         </td>
         <td></td>
       </tr>
@@ -36,7 +36,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <ScoringTextInput v-model="amount.populationVP[0]"/>
+          <ScoringTextInput v-model="amount.populationVP[0]" :max="20"/>
         </td>
         <td></td>
       </tr>
@@ -46,7 +46,7 @@
           <span v-html="t('endOfGameAmounts.vp')"></span>
         </th>
         <td>
-          <ScoringTextInput v-model="amount.cultureVP[0]"/>
+          <ScoringTextInput v-model="amount.cultureVP[0]" :max="20"/>
         </td>
         <td></td>
       </tr>
@@ -56,7 +56,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <ScoringTextInput v-model="amount.influenceSteps[0]"/>
+          <ScoringTextInput v-model="amount.influenceSteps[0]" :max="5"/>
         </td>
         <td></td>
       </tr>
@@ -66,7 +66,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td>
-          <ScoringTextInput v-model="amount.politicsSteps[0]"/>
+          <ScoringTextInput v-model="amount.politicsSteps[0]" :max="10"/>
         </td>
         <td></td>
       </tr>
@@ -76,7 +76,7 @@
           <span v-html="t('endOfGameAmounts.steps')"></span>
         </th>
         <td v-for="index in playerCount" :key="index">
-          <ScoringTextInput v-model="amount.warSteps[index-1]"/>
+          <ScoringTextInput v-model="amount.warSteps[index-1]" :max="7"/>
         </td>
       </tr>
       <tr>
@@ -156,14 +156,6 @@ export default defineComponent({
     return { t, state, router, amount, playerCount }
   },
   methods: {
-    toNumber(value? : number) {
-      if (typeof value == 'string') {
-        return 0
-      }
-      else {
-        return value ?? 0
-      }
-    },
     next() : void {
       this.state.finalScoringAmount = this.amount
       this.router.push('/endOfGame')
