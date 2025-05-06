@@ -29,8 +29,8 @@
       "playerColor": "Choose a player color for the Automa. The Automa only needs 1 track marker and 1 VP marker.",
       "trackTokens": "Place the Automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 0 VP).",
       "startPlayer": {
-        "player": "<b>You</b> are the start player. Take 10 Gold. Take the first player token.",
-        "bot": "<b>Automa</b> is the start player. Give it the first player token."
+        "player": "<b>You</b> are the start player. Take 10 Gold. Take the leader token.",
+        "bot": "<b>Automa</b> is the start player. Give it the leader token."
       },
       "secondPlayer": {
         "player": "<b>You</b> are the second player. Take 12 Gold. Take the architect token.",
