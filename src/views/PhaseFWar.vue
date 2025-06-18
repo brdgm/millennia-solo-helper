@@ -10,7 +10,7 @@
   </div>
 
   <ul>
-    <li v-html="t('phaseFWar.advance', {steps:warTrackAdvanceSteps})"></li>
+    <li v-html="t('phaseFWar.advance', {steps:warTrackAdvanceSteps}, warTrackAdvanceSteps)"></li>
     <li v-html="t('phaseFWar.outmax')"></li>
     <li v-if="round<8" v-html="t('phaseFWar.resolve')"></li>
     <li v-else v-html="t('phaseFWar.resolveLastRound')"></li>
