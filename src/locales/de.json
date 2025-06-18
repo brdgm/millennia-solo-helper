@@ -1,0 +1,143 @@
+{
+  "gameTitle": "Millennia: Tracks of Time",
+  "home": {
+    "title": "Millennia: Tracks of Time Solo Helper",
+    "play1": "Spiele <a href='https://boardgamegeek.com/boardgame/356883/millennia-tracks-of-time' target='_blank' rel='noopener'><b>Millennia: Tracks of Time</b></a> gegen Automa, die Solo-Gegnerin.",
+    "play2": "Diese Applikation ersetzt die Automa-Karten und leitet dich durch das Spiel. Darüber hinaus automatisiert sie die Technologiekartenwahl und die Auswahl der Wohlstandskarten.",
+    "feedback": "Discussion and Feedback:"
+  },
+  "setup": {
+    "title": "Spielaufbau",
+    "startPlayer": {
+      "title": "Spielbeginn",
+      "random": "Zufällig",
+      "player": "Du beginnst",
+      "bot": "Automa beginnt"
+    },
+    "difficultyLevel": {
+      "title": "Schwierigkeitsgrad",
+      "easy": "Leicht",
+      "hard": "Schwer"
+    }
+  },
+  "setupBot": {
+    "title": "Automa vorbereiten",
+    "setup": {
+      "gameBoard": "Bereite das Spiel als 2-Personen-Spiel gegen die Automa vor.",
+      "prosperityCards": "Lasse die Wohlstandskarten weg, sie werden von der Applikation verwaltet.",
+      "techCards": "Die Technologiekarten und leeren Technologiekarten werden von der Applikation zufällig angeboten, die Auswahlphase gegen die Automa findet in der Applikation statt. Suche die gewählten Technologiekarten aus dem Stapel für das aktuelle Zeitalter nach jeder Auswahlphase.",
+      "playerColor": "Wähle eine Spielfarbe für die Automa. Die Automa benötigt nur 1 Leistenmarker und 1 SP-Marker.",
+      "trackTokens": "Lege den Leistenmarker auf die <b>Kriegsleiste</b> und den SP-Marker auf die <b>Siegpunktleiste</b>.",
+      "startPlayer": {
+        "player": "<b>Du</b> fängst an. Nehme 10 Gold und den Führungsmarker.",
+        "bot": "<b>Automa</b> fängt an. Gebe ihr den Führungsmarker."
+      },
+      "secondPlayer": {
+        "player": "<b>Du</b> bist danach an der Reihe. Nehme 12 Gold und den Architekturmarker.",
+        "bot": "<b>Automa</b> ist danach an der Reihe. Gebe ihr den Architekturmarker."
+      }
+    },
+    "botRules": {
+      "intro": "Die wichtigsten Unterschiede für die Automa sind:",
+      "noGold": "Die Automa hat und erhält niemals Gold.",
+      "noActions": "Die Automa führt in der Aktionsphase keine Aktionen aus.",
+      "onlyWarTrack": "Die Automa rückt nur auf der Kriegsleiste und der Siegpunktleiste vor.",
+      "noVP": "Die Automa erhält keine SP außer denen auf der Kriegsleiste (durch Überschreiten des Leistenendes und durch die Wertung am Ende des Spiels)."
+    }
+  },
+  "phaseADrafting": {
+    "title": "A: Auswahl",
+    "playerDraft": "Deine Technologien",
+    "botDraft": "Automa-Technologien",
+    "playerTurnSelect": "Wähle eine Technologiekarte, oder verwende <i>Weiter</i> wenn du einen Marker auf eine Spezialaktion gelegt hast.",
+    "botRound8Army": "Automa wählt die Armee-Technologie und erhält <b>1 SP</b>."
+  },
+  "phaseBProsperity": {
+    "title": "B: Wohlstand",
+    "skip": "Automa überspringt diese Phase."
+  },
+  "phaseCIncome": {
+    "title": "C: Einkommen",
+    "skip": "Automa überspringt diese Phase."
+  },
+  "phaseDConstruction": {
+    "title": "D: Bau",
+    "remove": "Entferne:",
+    "pass": "Passen",
+    "notAvailable": "Nicht verfügbar",
+    "playerAction": "Kaufe ein Wunder oder Gebäude und wähle <i>Weiter</i>.<br/>Oder wähle <i>Passen</i> um die Bauphase zu beenden."
+  },
+  "phaseEActions": {
+    "title": "E: Aktionen",
+    "skip": "Automa überspringt diese Phase."
+  },
+  "phaseFWar": {
+    "title": "F: Krieg",
+    "advance": "Automa schreitet {steps} Schritt auf der Kriegsleiste voran. | Automa schreitet {steps} Schritte auf der Kriegsleiste voran.",
+    "outmax": "Wenn die Automa das Ende der Kriegsleiste erreicht, erhält sie wie gewohnt 3 SP pro Schritt über 7.",
+    "resolve": "Bewege alle Marker auf der Kriegsleiste um die gleiche Anzahl an Schritten zurück, bis der Marker mit dem niedrigsten Wert wieder auf 0 steht.",
+    "resolveLastRound": "<i>Letztes Zeitalter</i>: Bewege die Marker nicht zurück."
+  },
+  "phaseGUpkeep": {
+    "title": "G: Aufräumen",
+    "skip": "Automa überspringt diese Phase."
+  },
+  "endOfGameAmounts": {
+    "title": "Spielende: Auszählen",
+    "vp": "SP",
+    "steps": "Schritte",
+    "count": "Anzahl"
+  },
+  "endOfGame": {
+    "title": "Spielende",
+    "finalScore": "Die Punktzahl der Automa wird von deinen Punkten abgezogen, Endergebnis:",
+    "scoreTable": "Vergleiche deine Punktzahl mit dieser Tabelle:",
+    "vp": "{count} SP"
+  },
+  "sideBar": {
+    "round": "Zeitalter {round}"
+  },
+  "difficultyLevel": {
+    "1": "Normal - ohne 5-Schritt Kriegskarten",
+    "2": "Schwer - alle Kriegskarten"
+  },
+  "age": {
+    "1": "Bronzezeit",
+    "2": "Eisenzeit",
+    "3": "Mittelalter",
+    "4": "Zeitalter der Entdeckungen",
+    "5": "Industriezeitalter",
+    "6": "Moderne",
+    "7": "Informationszeitalter",
+    "8": "Zukunftszeitalter"
+  },
+  "player": {
+    "player": "Deine",
+    "bot": "Automa"
+  },
+  "notfound": {
+    "title": "Nicht Gefunden"
+  },
+  "action": {
+    "playGame": "Spielen",
+    "startGame": "Spiel starten",
+    "next": "Weiter",
+    "abortGame": "Spiel abbrechen",
+    "abortGameConfirm": "Das aktuelle Spiel wird abgebrochen - bist du sicher?",
+    "endGame": "Spiel beenden",
+    "endGameConfirm": "Dieses Spiel wird beendet - bist du sicher?",
+    "cancel": "Abbrechen",
+    "backToHome": "Zurück zum Anfang",
+    "back": "Zurück",
+    "close": "Schließen",
+    "ok": "OK",
+    "reset": "Zurücksetzen"
+  },
+  "footer": {
+    "credits": "Credits"
+  },
+  "serviceWorkerUpdatedRefresh": {
+    "title": "Applikation neu laden",
+    "notice": "Die Applikation wurde aktualisiert - möchtest du die Seite neu laden um die neueste Version zu nutzen?"
+  }
+}

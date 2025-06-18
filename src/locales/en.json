@@ -27,20 +27,20 @@
       "prosperityCards": "You do not need to set up the prosperity cards, they are managed and displayed by the application.",
       "techCards": "The tech cards and blank techs are randomized by the application, you are drafting them in the application against the Automa. After each drafting phase in the app, pick the cards your drafted from the stack of the corresponding age.",
       "playerColor": "Choose a player color for the Automa. The Automa only needs 1 track marker and 1 VP marker.",
-      "trackTokens": "Place the Automa markers on the <b>war track</b> and on the <b>VP track</b> (starting with 0 VP).",
+      "trackTokens": "Place the Automa markers on the <b>war track</b> and on the <b>VP track</b>.",
       "startPlayer": {
-        "player": "<b>You</b> are the start player. Take 10 Gold. Take the leader token.",
+        "player": "<b>You</b> are the start player. Take 10 gold. Take the leader token.",
         "bot": "<b>Automa</b> is the start player. Give it the leader token."
       },
       "secondPlayer": {
-        "player": "<b>You</b> are the second player. Take 12 Gold. Take the architect token.",
+        "player": "<b>You</b> are the second player. Take 12 gold. Take the architect token.",
         "bot": "<b>Automa</b> is the second player. Give it the architect token."
       }
     },
     "botRules": {
       "intro": "Differences between the Automa gameplay and a human player:",
       "noGold": "The Automa never has nor gains any gold.",
-      "noActions": "The Automa does not perform any actions in the action phase;",
+      "noActions": "The Automa does not perform any actions in the action phase.",
       "onlyWarTrack": "The Automa only advances on the war track and the VP track.",
       "noVP": "The Automa does not gain any VP except from the war track (by maxing out and by scoring at the end of the game)."
     }
@@ -73,7 +73,7 @@
   },
   "phaseFWar": {
     "title": "F: War",
-    "advance": "Automa advances {steps} steps on the war track.",
+    "advance": "Automa advances {steps} step on the war track. | Automa advances {steps} steps on the war track.",
     "outmax": "If the Automa maxes out the war track, it gains 3 VP per step beyond 7.",
     "resolve": "Move the war track markers back an equal number of steps until the lowest marker returns to zero.",
     "resolveLastRound": "<i>Last Age</i>: Do not move the war track markers."
@@ -86,8 +86,7 @@
     "title": "End of Game: Amounts",
     "vp": "VP",
     "steps": "Steps",
-    "count": "Count",
-    "amount": "Amount"
+    "count": "Count"
   },
   "endOfGame": {
     "title": "End of Game",
