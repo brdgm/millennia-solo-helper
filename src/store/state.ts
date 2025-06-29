@@ -20,6 +20,7 @@ export const useStateStore = defineStore(`${name}.state`, {
     resetGame() {
       this.rounds = []
       this.finalScoringAmount = undefined
+      this.gameStatsSend = false
     },
     storeRound(round : Round) {
       this.rounds = this.rounds.filter(item => item.round < round.round)
@@ -35,6 +36,7 @@ export interface State {
   setup: Setup
   rounds: Round[]
   finalScoringAmount?: FinalScoringAmount
+  gameStatsSend?: boolean
 }
 export interface Setup {
   difficultyLevel: DifficultyLevel

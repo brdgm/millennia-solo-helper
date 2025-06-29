@@ -21,3 +21,5 @@ jobs:
           gh-site-deploy-username: ${{ secrets.GH_SITE_DEPLOY_USERNAME }}
           gh-site-deploy-email: ${{ secrets.GH_SITE_DEPLOY_EMAIL }}
           gh-site-deploy-name: ${{ secrets.GH_SITE_DEPLOY_NAME }}
+          stats-forms-url: ${{ vars.VITE_STATS_FORM_URL }}
+          stats-field-mapping: ${{ vars.VITE_STATS_FIELD_MAPPING }}
