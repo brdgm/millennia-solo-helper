@@ -129,6 +129,9 @@ import { defineComponent, PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '../structure/AppIcon.vue'
 import toNumber from '@brdgm/brdgm-commons/src/util/form/toNumber'
+import postGameStats from '@brdgm/brdgm-commons/src/util/stats/postGameStats'
+import { version } from '@/../package.json'
+import WarCards from '@/services/WarCards'
 
 export default defineComponent({
   name: 'FinalScoring',
@@ -182,6 +185,41 @@ export default defineComponent({
   },
   methods: {
     toNumber
+  },
+  mounted() {
+    // send anonymous game stats - max. once per game
+    if (!this.state.gameStatsSend) {
+      const totalWarSteps_Automa = this.state.rounds.reduce((acc, round) => {
+        const warCardId = round.botCards.war.discard[0]
+        let warAdvance = 0
+        if (warCardId) {
+          warAdvance = WarCards.get(warCardId).warAdvance
+        }
+        return acc + warAdvance
+      }, 0)
+      const stats = {
+        version,
+        difficultyLevel: this.state.setup.difficultyLevel,
+        totalVP: this.totalVPPlayer,
+        scoringTrackVP: this.amount.scoringTrackVP[0],
+        prosperityVP: this.amount.prosperityVP[0],
+        populationVP: this.amount.populationVP[0],
+        cultureVP: this.amount.cultureVP[0],
+        influenceSteps: this.amount.influenceSteps[0],
+        politicsSteps: this.amount.politicsSteps[0],
+        warSteps: this.amount.warSteps[0],
+        wonderVPs: this.amount.wonderVPs[0],
+        yellowBuildingVPs: this.amount.yellowBuildingVPs[0],
+        diplomacyCardCount: this.amount.diplomacyCardCount[0],
+        scoringTrackVP_Automa: this.amount.scoringTrackVP[1],
+        warSteps_Automa: this.amount.warSteps[1],
+        totalWarSteps_Automa
+      }
+      postGameStats(stats,
+        import.meta.env.VITE_STATS_FORM_URL,
+        import.meta.env.VITE_STATS_FIELD_MAPPING)
+      this.state.gameStatsSend = true
+    }
   }
 })
 </script>
