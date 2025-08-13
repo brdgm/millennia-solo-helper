@@ -78,7 +78,7 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     const state = useStateStore()
-    const router = useRouter();
+    const router = useRouter()
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
     const botTechs = ref(roundData.botTechs ?? [])
@@ -142,7 +142,7 @@ export default defineComponent({
       }
       document.querySelector(`.techCard[data-tech="${tech}"]`)?.classList.add('remove')
       this.removeAnimation = true
-      await new Promise(resolve => setTimeout(resolve, 400));
+      await new Promise(resolve => setTimeout(resolve, 400))
       this.removeAnimation = false
       this.navigationState.techCardSelection.remove(tech)
       this.persist()
