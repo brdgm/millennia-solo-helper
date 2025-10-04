@@ -56,7 +56,9 @@ const cards : WarCard[] = [
 ]
 
 const cardsMap = new Map<number,WarCard>()
-cards.forEach(card => cardsMap.set(card.id, card))
+for (const card of cards) {
+  cardsMap.set(card.id, card)
+}
 
 export default {
 
