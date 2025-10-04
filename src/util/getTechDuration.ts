@@ -6,7 +6,7 @@ import Tech from '@/services/enum/Tech'
  * @param round Age
  * @returns Tech duration
  */
-export default function(tech: Tech, round: number) : number {
+export default function getTechDuration(tech: Tech, round: number) : number {
   const index = round - 1
   switch (tech) {
     case Tech.AGRICULTURE:    return [2,3,1,2,1,1,2,1][index]
