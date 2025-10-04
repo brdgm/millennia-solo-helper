@@ -5,7 +5,7 @@ import Tech from '@/services/enum/Tech'
  * @param tech Tech card
  * @returns Color code
  */
-export default function(tech: Tech) : string {
+export default function getTechColor(tech: Tech) : string {
   switch (tech) {
     case Tech.AGRICULTURE:    return '#47914d'
     case Tech.ARMY:           return '#ce372f'
