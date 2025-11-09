@@ -6,10 +6,10 @@ describe('services/RowPlaceholders', () => {
     const rowPlaceholders = RowPlaceholders.new()
 
     expect(rowPlaceholders.rows.length).to.eq(2)
-    rowPlaceholders.rows.forEach(row => {
+    for (const row of rowPlaceholders.rows) {
       expect(row).to.greaterThanOrEqual(1)
       expect(row).to.lessThanOrEqual(4)
-    })
+    }
 
     const persistence = rowPlaceholders.toPersistence()
     expect(persistence.rows.length).to.eq(2)
