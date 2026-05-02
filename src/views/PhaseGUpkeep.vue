@@ -64,7 +64,7 @@ export default defineComponent({
         initialTechCardSelection: TechCardSelection.new(rowPlaceholders.rows, nextRound).toPersistence()
       }
       this.state.storeRound(round)
-      this.$router.push(`/round/${nextRound}/drafting`)
+      this.$router.push(`/round/${nextRound}/drafting/1`)
     }
   }
 })
