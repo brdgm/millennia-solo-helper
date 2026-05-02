@@ -280,6 +280,12 @@ export default defineComponent({
     width: 70px;
     height: 100px;
   }
+  &.empty {
+    border: 2px dashed #aaa;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    opacity: 0.5;
+  }
 }
 .draftedCards {
   display: flex;
