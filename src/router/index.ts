@@ -35,12 +35,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/round/:round/drafting',
-    name: 'PhaseADrafting',
-    component: PhaseADrafting
+    // redirect to step 1 of drafting phase (route is kept for backward compatibility)
+    redirect: (to) => ({ name: 'PhaseADrafting', params: { round: to.params.round, step: '1' } })
   },
   {
     path: '/round/:round/drafting/:step',
-    name: 'PhaseADraftingStep',
+    name: 'PhaseADrafting',
     component: PhaseADrafting
   },
   {

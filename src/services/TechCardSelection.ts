@@ -106,13 +106,6 @@ export default class TechCardSelection {
   }
 
   /**
-   * Resets the removed tech cards.
-   */
-  public reset() : void {
-    this._removedTechs.value = []
-  }
-
-  /**
    * Creates a selection of techs in 4 ros respecting the placeholder rows.
    */
   public static new(placeholderRows: readonly number[], round: number) : TechCardSelection {

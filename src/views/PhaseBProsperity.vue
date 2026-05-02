@@ -50,7 +50,7 @@ export default defineComponent({
   },
   computed: {
     backButtonRouteTo() : string {
-      return `/round/${this.round}/drafting`
+      return `/round/${this.round}/drafting/${(this.navigationState.lastDraftStep?.step ?? 0)+1}`
     },
     roundData() : Round|undefined {
       return this.state.rounds.find(item => item.round == this.navigationState.round)

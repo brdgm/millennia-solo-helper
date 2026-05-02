@@ -14,10 +14,11 @@ export default function mockRound(params?: MockRoundParams) : Round {
       war: { pile: [], discard: [] }
     },
     rowPlaceholders: params?.rowPlaceholders ?? { rows: [] },
-    techCardSelection: params?.techCardSelection ?? { techs: [], removedTechs: [] },
+    initialTechCardSelection: params?.initialTechCardSelection,
     techDraftSteps: params?.techDraftSteps,
     nextStartPlayer: params?.nextStartPlayer,
-    nextArchitectPlayer: params?.nextArchitectPlayer
+    nextArchitectPlayer: params?.nextArchitectPlayer,
+    techCardSelection: params?.techCardSelection
   }
   return round
 }
@@ -29,9 +30,10 @@ export interface MockRoundParams {
   prosperityCards?: ProsperityCardsPersistence
   botCards?: BotCardsPersistence
   rowPlaceholders?: RowPlaceholdersPersistence
-  techCardSelection?: TechCardSelectionPersistence
+  initialTechCardSelection?: TechCardSelectionPersistence
   techDraftSteps?: TechDraftStep[]
-  // deprecated fields, latest implementation uses the techDraftSteps field instead
-  nextStartPlayer?: Player,
-  nextArchitectPlayer?: Player,
+  // deprecated fields, latest implementation uses the initialTechDraftSelection and techDraftSteps fields instead
+  techCardSelection?: TechCardSelectionPersistence
+  nextStartPlayer?: Player
+  nextArchitectPlayer?: Player
 }

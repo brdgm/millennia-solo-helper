@@ -1,4 +1,4 @@
-import { Round, State, TechDraftStep } from '@/store/state'
+import { Round, State, TechCardSelectionPersistence, TechDraftStep } from '@/store/state'
 import { RouteLocation } from 'vue-router'
 import getIntRouteParam from '@brdgm/brdgm-commons/src/util/router/getIntRouteParam'
 import Player from '@/services/enum/Player'
@@ -17,6 +17,7 @@ export default class NavigationState {
   readonly techCardSelection : TechCardSelection
 
   private readonly roundData : Round
+  readonly lastDraftStep? : TechDraftStep
 
   constructor(route: RouteLocation, state: State) {    
     this.round = getIntRouteParam(route, 'round')
@@ -33,14 +34,14 @@ export default class NavigationState {
         prosperityCards: ProsperityCards.new().toPersistence(),
         botCards: BotCards.new(state.setup.difficultyLevel).toPersistence(),
         rowPlaceholders: rowPlaceholders.toPersistence(),
-        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, this.round).toPersistence()
       }
     }
     this.roundData = roundData
+    this.lastDraftStep = this.getLastDraftStep()
     this.prosperityCards = ProsperityCards.fromPersistence(roundData.prosperityCards)
     this.botCards = BotCards.fromPersistence(roundData.botCards)
     this.rowPlaceholders = RowPlaceholders.fromPersistence(roundData.rowPlaceholders)
-    this.techCardSelection = TechCardSelection.fromPersistence(roundData.techCardSelection, this.round)
+    this.techCardSelection = TechCardSelection.fromPersistence(this.getTechCardSelectionPersistence(), this.round)
   }
 
   public get startPlayer() : Player {
@@ -51,10 +52,25 @@ export default class NavigationState {
     return this.lastDraftStep?.nextArchitectPlayer ?? this.roundData.nextArchitectPlayer ?? this.roundData.architectPlayer
   }
 
-  private get lastDraftStep() : TechDraftStep|undefined {
-    if (this.roundData.techDraftSteps) {
-      return this.roundData.techDraftSteps.toSorted((a, b) => a.step - b.step)[this.roundData.techDraftSteps.length - 1]
+  private getLastDraftStep() : TechDraftStep | undefined {
+    const techDraftSteps = (this.roundData.techDraftSteps?.toSorted((a, b) => a.step - b.step) ?? [])
+        .filter(item => item.step < this.draftingStep || this.draftingStep == 0)
+    return techDraftSteps[techDraftSteps.length - 1]
+  }
+
+  private getTechCardSelectionPersistence() : TechCardSelectionPersistence {
+    if (this.lastDraftStep?.techCardSelection) {
+      return this.lastDraftStep?.techCardSelection
     }
+    if (this.roundData.initialTechCardSelection) {
+      return this.roundData.initialTechCardSelection
+    }
+    if (this.roundData.techCardSelection) {
+      // backward compatibility with old implementation; reset selection to restart draft
+      return { techs: this.roundData.techCardSelection.techs, removedTechs: [] }
+    }
+    // should never happen
+    return TechCardSelection.new(this.rowPlaceholders.rows, this.round).toPersistence()
   }
 
 }

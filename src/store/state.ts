@@ -25,6 +25,13 @@ export const useStateStore = defineStore(`${name}.state`, {
     storeRound(round : Round) {
       this.rounds = this.rounds.filter(item => item.round < round.round)
       this.rounds.push(round)
+    },
+    storeTechDraftStep(techDraftStep : TechDraftStep) {
+      const round = this.rounds.find(item => item.round == techDraftStep.round)
+      if (round) {
+        round.techDraftSteps = (round.techDraftSteps ?? []).filter(item => item.step < techDraftStep.step)
+        round.techDraftSteps.push(techDraftStep)
+      }
     }
   },
   persist: true
@@ -51,24 +58,26 @@ export interface Round {
   prosperityCards: ProsperityCardsPersistence
   botCards: BotCardsPersistence
   rowPlaceholders: RowPlaceholdersPersistence
-  techCardSelection: TechCardSelectionPersistence
+  initialTechCardSelection?: TechCardSelectionPersistence
   techDraftSteps?: TechDraftStep[]
-  // the following fields are deprecated, latest implementation uses the techDraftSteps field instead
+  // the following fields are deprecated, latest implementation uses the initialTechCardSelection and techDraftSteps fields instead
   nextStartPlayer?: Player
   nextArchitectPlayer?: Player
   botTechs?: Tech[]
   playerTechs?: Tech[]
   playerSpecialActions?: number
+  techCardSelection?: TechCardSelectionPersistence
 }
 
 export interface TechDraftStep {
+  round: number
   step: number
-  player: Player
+  techCardSelection: TechCardSelectionPersistence
   nextStartPlayer?: Player
   nextArchitectPlayer?: Player
-  botTechs?: Tech[]
-  playerTechs?: Tech[]
-  playerSpecialActions?: number
+  botTechs: Tech[]
+  playerTechs: Tech[]
+  playerSpecialActions: number
 }
 
 export interface BotCardsPersistence {

@@ -23,9 +23,9 @@ describe('util/NavigationState', () => {
     const state = mockState({startPlayer:Player.BOT,rounds:[
       mockRound({round:1,startPlayer:Player.BOT,architectPlayer:Player.PLAYER,
         techDraftSteps:[  
-          { step: 0, player: Player.BOT },
-          { step: 1, player: Player.PLAYER, nextStartPlayer: Player.PLAYER },
-          { step: 2, player: Player.PLAYER, nextStartPlayer: Player.PLAYER, nextArchitectPlayer: Player.BOT },
+          { round: 1, step: 1, techCardSelection:{ techs: [], removedTechs: [] }, botTechs: [], playerTechs: [], playerSpecialActions: 0 },
+          { round: 2, step: 2, techCardSelection:{ techs: [], removedTechs: [] }, botTechs: [], playerTechs: [], playerSpecialActions: 0, nextStartPlayer: Player.PLAYER },
+          { round: 3, step: 3, techCardSelection:{ techs: [], removedTechs: [] }, botTechs: [], playerTechs: [], playerSpecialActions: 0, nextStartPlayer: Player.PLAYER, nextArchitectPlayer: Player.BOT },
         ]})
     ]})
     const navigationState = new NavigationState(route, state)

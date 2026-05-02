@@ -6,6 +6,7 @@
       <b>draftingPriority</b>: <span v-html="getCardDeckInfo(draftingPriority)"></span><br/>
       <b>construction</b>: <span v-html="getCardDeckInfo(construction)"></span><br/>
       <b>war</b>: <span v-html="getCardDeckInfo(war)"></span><br/>
+      <b>lastDraftStep</b>: {{navigationState.lastDraftStep}}<br/>
     </p>
   </div>
 </template>
