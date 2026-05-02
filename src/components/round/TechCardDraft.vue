@@ -157,17 +157,10 @@ export default defineComponent({
       if (this.draftingCompleted) {
         return
       }
-      if (this.botMarkerPlaced < this.playerMarkerPlaced) {
+      if (this.roundData.startPlayer == Player.BOT) {
         await this.nextTurnBot()
-        await this.nextTurn()
-      }
-      else if (this.playerMarkerPlaced < this.botMarkerPlaced) {
         await this.nextTurnPlayer()
       }
-      else if (this.roundData.startPlayer == Player.BOT) {
-        await this.nextTurnBot()
-        await this.nextTurn()
-    }
       else {
         await this.nextTurnPlayer()
       }

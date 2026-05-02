@@ -53,9 +53,9 @@ export default class NavigationState {
   }
 
   private getLastDraftStep() : TechDraftStep | undefined {
-    const techDraftSteps = (this.roundData.techDraftSteps?.toSorted((a, b) => a.step - b.step) ?? [])
+    return (this.roundData.techDraftSteps?.toSorted((a, b) => a.step - b.step) ?? [])
         .filter(item => item.step < this.draftingStep || this.draftingStep == 0)
-    return techDraftSteps[techDraftSteps.length - 1]
+        .at(-1)
   }
 
   private getTechCardSelectionPersistence() : TechCardSelectionPersistence {
