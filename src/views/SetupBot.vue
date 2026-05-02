@@ -87,10 +87,10 @@ export default defineComponent({
         prosperityCards: ProsperityCards.new().toPersistence(),
         botCards: BotCards.new(this.state.setup.difficultyLevel).toPersistence(),
         rowPlaceholders: rowPlaceholders.toPersistence(),
-        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, 1).toPersistence()
+        initialTechCardSelection: TechCardSelection.new(rowPlaceholders.rows, 1).toPersistence()
       }
       this.state.storeRound(round)
-      this.$router.push('/round/1/drafting')
+      this.$router.push('/round/1/drafting/1')
     }
   }
 })

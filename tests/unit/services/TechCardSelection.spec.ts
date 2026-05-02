@@ -17,7 +17,7 @@ describe('services/TechCardSelection', () => {
     expect(persistence.techs.flat().length).to.eq(16)
   })
 
-  it('remove-reset-getIncome', () => {
+  it('remove-getIncome', () => {
     const techCardSelection = TechCardSelection.fromPersistence({
       techs: [
         [Tech.COMMUNICATION, Tech.ECONOMICS, Tech.ENERGY, Tech.ENGINEERING],
@@ -34,10 +34,6 @@ describe('services/TechCardSelection', () => {
 
     expect(techCardSelection.getIncome(Tech.TRANSPORTATION)).to.eq(4)
     expect(techCardSelection.getIncome(Tech.ENGINEERING)).to.eq(2)
-
-    techCardSelection.reset()
-    expect(techCardSelection.techs.flat().length).to.eq(16)
-    expect(techCardSelection.techs[2]).to.eql([Tech.SOCIAL_SCIENCE, Tech.TRANSPORTATION, Tech.ARTS, TechPlaceholder.BLANK])
   })
 
   it('determineTech', () => {

@@ -1,5 +1,5 @@
 import Player from '@/services/enum/Player'
-import { BotCardsPersistence, ProsperityCardsPersistence, Round, RowPlaceholdersPersistence, TechCardSelectionPersistence } from '@/store/state'
+import { BotCardsPersistence, ProsperityCardsPersistence, Round, RowPlaceholdersPersistence, TechCardSelectionPersistence, TechDraftStep } from '@/store/state'
 
 export default function mockRound(params?: MockRoundParams) : Round {
   const round : Round = {
@@ -14,9 +14,11 @@ export default function mockRound(params?: MockRoundParams) : Round {
       war: { pile: [], discard: [] }
     },
     rowPlaceholders: params?.rowPlaceholders ?? { rows: [] },
-    techCardSelection: params?.techCardSelection ?? { techs: [], removedTechs: [] },
+    initialTechCardSelection: params?.initialTechCardSelection,
+    techDraftSteps: params?.techDraftSteps,
     nextStartPlayer: params?.nextStartPlayer,
-    nextArchitectPlayer: params?.nextArchitectPlayer
+    nextArchitectPlayer: params?.nextArchitectPlayer,
+    techCardSelection: params?.techCardSelection
   }
   return round
 }
@@ -28,7 +30,10 @@ export interface MockRoundParams {
   prosperityCards?: ProsperityCardsPersistence
   botCards?: BotCardsPersistence
   rowPlaceholders?: RowPlaceholdersPersistence
+  initialTechCardSelection?: TechCardSelectionPersistence
+  techDraftSteps?: TechDraftStep[]
+  // deprecated fields, latest implementation uses the initialTechDraftSelection and techDraftSteps fields instead
   techCardSelection?: TechCardSelectionPersistence
-  nextStartPlayer?: Player,
-  nextArchitectPlayer?: Player,
+  nextStartPlayer?: Player
+  nextArchitectPlayer?: Player
 }
