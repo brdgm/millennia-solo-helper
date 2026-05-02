@@ -52,6 +52,18 @@ export interface Round {
   botCards: BotCardsPersistence
   rowPlaceholders: RowPlaceholdersPersistence
   techCardSelection: TechCardSelectionPersistence
+  techDraftSteps?: TechDraftStep[]
+  // the following fields are deprecated, latest implementation uses the techDraftSteps field instead
+  nextStartPlayer?: Player
+  nextArchitectPlayer?: Player
+  botTechs?: Tech[]
+  playerTechs?: Tech[]
+  playerSpecialActions?: number
+}
+
+export interface TechDraftStep {
+  step: number
+  player: Player
   nextStartPlayer?: Player
   nextArchitectPlayer?: Player
   botTechs?: Tech[]

@@ -1,4 +1,4 @@
-import { Round, State } from '@/store/state'
+import { Round, State, TechDraftStep } from '@/store/state'
 import { RouteLocation } from 'vue-router'
 import getIntRouteParam from '@brdgm/brdgm-commons/src/util/router/getIntRouteParam'
 import Player from '@/services/enum/Player'
@@ -10,6 +10,7 @@ import TechCardSelection from '@/services/TechCardSelection'
 export default class NavigationState {
 
   readonly round : number
+  readonly draftingStep: number
   readonly prosperityCards : ProsperityCards
   readonly botCards : BotCards
   readonly rowPlaceholders : RowPlaceholders
@@ -19,6 +20,7 @@ export default class NavigationState {
 
   constructor(route: RouteLocation, state: State) {    
     this.round = getIntRouteParam(route, 'round')
+    this.draftingStep = getIntRouteParam(route, 'step')
 
     let roundData = state.rounds.find(item => item.round === this.round)
     if (!roundData) {
@@ -42,11 +44,17 @@ export default class NavigationState {
   }
 
   public get startPlayer() : Player {
-    return this.roundData.nextStartPlayer ?? this.roundData.startPlayer
+    return this.lastDraftStep?.nextStartPlayer ?? this.roundData.nextStartPlayer ?? this.roundData.startPlayer
   }
 
   public get architectPlayer() : Player {
-    return this.roundData.nextArchitectPlayer ?? this.roundData.architectPlayer
+    return this.lastDraftStep?.nextArchitectPlayer ?? this.roundData.nextArchitectPlayer ?? this.roundData.architectPlayer
+  }
+
+  private get lastDraftStep() : TechDraftStep|undefined {
+    if (this.roundData.techDraftSteps) {
+      return this.roundData.techDraftSteps.toSorted((a, b) => a.step - b.step)[this.roundData.techDraftSteps.length - 1]
+    }
   }
 
 }

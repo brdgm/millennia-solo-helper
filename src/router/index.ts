@@ -39,6 +39,11 @@ const routes: Array<RouteRecordRaw> = [
     component: PhaseADrafting
   },
   {
+    path: '/round/:round/drafting/:step',
+    name: 'PhaseADraftingStep',
+    component: PhaseADrafting
+  },
+  {
     path: '/round/:round/prosperity',
     name: 'PhaseBProsperity',
     component: PhaseBProsperity
