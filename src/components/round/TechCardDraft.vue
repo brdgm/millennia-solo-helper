@@ -32,31 +32,27 @@
   <button class="btn btn-primary btn-lg me-3 mt-2" @click="next()">
     {{t('action.next')}}
   </button>
-  <button class="btn btn-outline-secondary btn-sm mt-2" @click="reset()">
-    {{t('action.reset')}}
-  </button>
 
   <div class="draftedCards">
-    <div v-if="playerTechs.length > 0" class="mt-3">
-      <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="playerTechs"/>
+    <div v-if="techDraftStep.playerTechs.length > 0" class="mt-3">
+      <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="techDraftStep.playerTechs"/>
     </div>
 
-    <div v-if="botTechs.length > 0" class="mt-3">
+    <div v-if="techDraftStep.botTechs.length > 0" class="mt-3">
       <h5>{{t('phaseADrafting.botDraft')}}</h5>
       <div class="techs">
         <div class="techRow">
-          <TechCard v-for="tech of botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
+          <TechCard v-for="tech of techDraftStep.botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useStateStore } from '@/store/state'
+import { TechDraftStep, useStateStore } from '@/store/state'
 import NavigationState from '@/util/NavigationState'
 import TechCardSelection from '@/services/TechCardSelection'
 import Tech from '@/services/enum/Tech'
@@ -67,6 +63,7 @@ import TechCard from './TechCard.vue'
 import AppIcon from '../structure/AppIcon.vue'
 import TechCardsPlayerDraft from './TechCardsPlayerDraft.vue'
 import { useRouter } from 'vue-router'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
   name: 'TechCardDraft',
@@ -81,11 +78,18 @@ export default defineComponent({
     const router = useRouter()
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
-    const botTechs = ref(roundData.botTechs ?? [])
-    const playerTechs = ref(roundData.playerTechs ?? [])
-    const playerSpecialActions = ref(roundData.playerSpecialActions ?? 0)
+    const lastTechDraftStep = props.navigationState.lastDraftStep
+    const techDraftStep = ref({
+      round: props.navigationState.round,
+      step: props.navigationState.draftingStep,
+      nextStartPlayer: lastTechDraftStep?.nextStartPlayer,
+      nextArchitectPlayer: lastTechDraftStep?.nextArchitectPlayer,
+      botTechs: cloneDeep(lastTechDraftStep?.botTechs ?? []),
+      playerTechs: cloneDeep(lastTechDraftStep?.playerTechs ?? []),
+      playerSpecialActions: lastTechDraftStep?.playerSpecialActions ?? 0
+    } as TechDraftStep)
 
-    return { t, state, router, roundData, botTechs, playerTechs, playerSpecialActions }
+    return { t, state, router, roundData, techDraftStep }
   },
   props: {
     navigationState: {
@@ -108,22 +112,22 @@ export default defineComponent({
       return this.navigationState.techCardSelection
     },
     botMarkerPlaced() : number {
-      return this.botTechs.length
+      return this.techDraftStep.botTechs.length
     },
     playerMarkerPlaced() : number {
-      return this.playerTechs.length + this.playerSpecialActions
+      return this.techDraftStep.playerTechs.length + this.techDraftStep.playerSpecialActions
     },
     draftingCompleted() : boolean {
       return this.botMarkerPlaced == 4 && this.playerMarkerPlaced == 4
     },
     playerIncomeTotal() : number {
-      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
+      return this.techDraftStep.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
     },
     playerIncomeLockedTotal() : number {
-      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+      return this.techDraftStep.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
     },
     botRound8Army() : boolean {
-      return this.navigationState.round == 8 && this.botTechs.includes(Tech.ARMY)
+      return this.navigationState.round == 8 && this.techDraftStep.botTechs.includes(Tech.ARMY)
     }
   },
   methods: {
@@ -145,20 +149,14 @@ export default defineComponent({
       await new Promise(resolve => setTimeout(resolve, 400))
       this.removeAnimation = false
       this.navigationState.techCardSelection.remove(tech)
-      this.persist()
     },
     async nextTurn() {
       if (this.draftingCompleted) {
         return
       }
-      if (this.botMarkerPlaced < this.playerMarkerPlaced) {
+      if (this.roundData.startPlayer == Player.BOT) {
         await this.nextTurnBot()
-      }
-      else if (this.playerMarkerPlaced < this.botMarkerPlaced) {
         await this.nextTurnPlayer()
-      }
-      else if (this.roundData.startPlayer == Player.BOT) {
-        await this.nextTurnBot()
       }
       else {
         await this.nextTurnPlayer()
@@ -169,15 +167,14 @@ export default defineComponent({
       const draftingRowCard = botCards.draftingRow.draw()
       const draftingPriorityCard = botCards.draftingPriority.draw()
       const tech = techCardSelection.determineTech(draftingRowCard, draftingPriorityCard, prosperityCards.current.flat())
-      this.botTechs.push(tech)
+      this.techDraftStep.botTechs.push(tech)
       if (tech == Tech.ARMY) {
-        this.roundData.nextStartPlayer = Player.BOT
+        this.techDraftStep.nextStartPlayer = Player.BOT
       }
       if (tech == Tech.ENGINEERING) {
-        this.roundData.nextArchitectPlayer = Player.BOT
+        this.techDraftStep.nextArchitectPlayer = Player.BOT
       }
       await this.remove(tech)
-      await this.nextTurn()
     },
     async nextTurnPlayer() {
       this.playerTurn = true
@@ -191,48 +188,37 @@ export default defineComponent({
         return
       }
       this.playerTurn = false
-      this.playerTechs.push(t)
-      this.roundData.playerTechs = this.playerTechs
+      this.techDraftStep.playerTechs.push(t)
       if (t == Tech.ARMY) {
-        this.roundData.nextStartPlayer = Player.PLAYER
+        this.techDraftStep.nextStartPlayer = Player.PLAYER
       }
       if (t == Tech.ENGINEERING) {
-        this.roundData.nextArchitectPlayer = Player.PLAYER
+        this.techDraftStep.nextArchitectPlayer = Player.PLAYER
       }
       await this.remove(t)
-      await this.nextTurn()
-    },
-    async reset() {
-      this.techCardSelection.reset()
-      this.navigationState.botCards.draftingRow.reset()
-      this.navigationState.botCards.draftingPriority.reset()
-      this.roundData.nextStartPlayer = undefined
-      this.roundData.nextArchitectPlayer = undefined
-      this.roundData.playerTechs = undefined
-
-      this.botTechs = []
-      this.playerTechs = []
-      this.playerSpecialActions = 0
-
-      this.persist()
-      await this.nextTurn()
+      await this.playerTurnCompleted()
     },
     async next() {
       if (this.draftingCompleted) {
         this.router.push(this.nextButtonRouteTo)
       }
       else {
-        this.playerSpecialActions++
+        this.techDraftStep.playerSpecialActions++
         this.playerTurn = false
-        this.persist()
-        await this.nextTurn()
+        await this.playerTurnCompleted()
       }
     },
-    persist() : void {
-      this.roundData.techCardSelection = this.techCardSelection.toPersistence()
-      this.roundData.botTechs = this.botTechs
-      this.roundData.playerTechs = this.playerTechs
-      this.roundData.playerSpecialActions = this.playerSpecialActions
+    async playerTurnCompleted() {
+      // if player was first player, execute bot turn before going to next step
+      if (this.roundData.startPlayer == Player.PLAYER) {
+        await this.nextTurnBot()
+      }
+      this.persistAndNextStep()
+    },
+    persistAndNextStep() : void {
+      this.techDraftStep.techCardSelection = this.techCardSelection.toPersistence()
+      this.state.storeTechDraftStep(this.techDraftStep)
+      this.router.push(`/round/${this.navigationState.round}/drafting/${this.techDraftStep.step+1}`)
     }
   },
   mounted() {
@@ -279,6 +265,12 @@ export default defineComponent({
   @media (max-width: 600px) {
     width: 70px;
     height: 100px;
+  }
+  &.empty {
+    border: 2px dashed #aaa;
+    border-radius: 6px;
+    background-color: #f0f0f0;
+    opacity: 0.5;
   }
 }
 .draftedCards {

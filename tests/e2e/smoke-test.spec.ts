@@ -1,4 +1,10 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Locator } from '@playwright/test'
+
+async function clickWhenReady(locator: Locator) {
+  await expect(locator).toBeVisible()
+  await expect(locator).toBeEnabled()
+  await locator.click()
+}
 
 test('smoke test', async ({ page }) => {
   await page.goto('/')
@@ -13,18 +19,20 @@ test('smoke test', async ({ page }) => {
   await page.getByRole('button', { name: 'Start Game' }).click()
 
   // play 1 round
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Pass' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
-  await page.getByRole('button', { name: 'Next' }).click()
+  const nextButton = page.getByRole('button', { name: 'Next' })
+  const passButton = page.getByRole('button', { name: 'Pass' })
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(passButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
+  await clickWhenReady(nextButton)
 
   // abort game
   await page.getByRole('button', { name: 'Abort Game' }).click()

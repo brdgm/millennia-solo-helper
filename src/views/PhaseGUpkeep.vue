@@ -61,10 +61,10 @@ export default defineComponent({
         prosperityCards: prosperityCards.toPersistence(),
         botCards: botCards.toPersistence(),
         rowPlaceholders: rowPlaceholders.toPersistence(),
-        techCardSelection: TechCardSelection.new(rowPlaceholders.rows, nextRound).toPersistence()
+        initialTechCardSelection: TechCardSelection.new(rowPlaceholders.rows, nextRound).toPersistence()
       }
       this.state.storeRound(round)
-      this.$router.push(`/round/${nextRound}/drafting`)
+      this.$router.push(`/round/${nextRound}/drafting/1`)
     }
   }
 })

@@ -23,7 +23,7 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import FooterButtons from '@/components/structure/FooterButtons.vue'
 import { useRoute } from 'vue-router'
-import { Round, useStateStore } from '@/store/state'
+import { useStateStore } from '@/store/state'
 import SideBar from '@/components/round/SideBar.vue'
 import NavigationState from '@/util/NavigationState'
 import DebugInfo from '@/components/round/DebugInfo.vue'
@@ -50,13 +50,10 @@ export default defineComponent({
   },
   computed: {
     backButtonRouteTo() : string {
-      return `/round/${this.round}/drafting`
-    },
-    roundData() : Round|undefined {
-      return this.state.rounds.find(item => item.round == this.navigationState.round)
+      return `/round/${this.round}/drafting/${(this.navigationState.lastDraftStep?.step ?? 0)+1}`
     },
     playerTechs() : Tech[] {
-      return this.roundData?.playerTechs ?? []
+      return this.navigationState.lastDraftStep?.playerTechs ?? []
     }
   },
   methods: {

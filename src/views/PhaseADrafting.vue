@@ -35,15 +35,18 @@ export default defineComponent({
     const state = useStateStore()
 
     const navigationState = new NavigationState(route, state)
-    const { round } = navigationState
+    const { round, draftingStep } = navigationState
 
-    return { t, state, navigationState, round }
+    return { t, state, navigationState, round, draftingStep, route }
   },
   computed: {
     nextButtonRouteTo() : string {
       return `/round/${this.round}/prosperity`
     },
     backButtonRouteTo() : string {
+      if (this.draftingStep > 1) {
+        return `/round/${this.round}/drafting/${this.draftingStep-1}`
+      }
       if (this.round > 1) {
         return `/round/${this.round-1}/upkeep`
       }
