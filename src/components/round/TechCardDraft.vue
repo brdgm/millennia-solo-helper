@@ -78,7 +78,7 @@ export default defineComponent({
     const router = useRouter()
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
-    const lastTechDraftStep = roundData.techDraftSteps?.find(item => item.step == props.navigationState.draftingStep - 1)
+    const lastTechDraftStep = props.navigationState.lastDraftStep
     const botTechs = ref(cloneDeep(lastTechDraftStep?.botTechs ?? []))
     const playerTechs = ref(cloneDeep(lastTechDraftStep?.playerTechs ?? []))
     const playerSpecialActions = ref(lastTechDraftStep?.playerSpecialActions ?? 0)
