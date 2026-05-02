@@ -79,16 +79,16 @@ export default defineComponent({
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
     const lastTechDraftStep = roundData.techDraftSteps?.find(item => item.step == props.navigationState.draftingStep - 1)
-    const botTechs = ref(lastTechDraftStep?.botTechs ?? [])
-    const playerTechs = ref(lastTechDraftStep?.playerTechs ?? [])
+    const botTechs = ref(cloneDeep(lastTechDraftStep?.botTechs ?? []))
+    const playerTechs = ref(cloneDeep(lastTechDraftStep?.playerTechs ?? []))
     const playerSpecialActions = ref(lastTechDraftStep?.playerSpecialActions ?? 0)
     const techDraftStep = ref({
       round: props.navigationState.round,
       step: props.navigationState.draftingStep,
       nextStartPlayer: lastTechDraftStep?.nextStartPlayer,
       nextArchitectPlayer: lastTechDraftStep?.nextArchitectPlayer,
-      botTechs: cloneDeep(lastTechDraftStep?.botTechs ?? []),
-      playerTechs: cloneDeep(lastTechDraftStep?.playerTechs ?? []),
+      botTechs: botTechs.value,
+      playerTechs: playerTechs.value,
       playerSpecialActions: lastTechDraftStep?.playerSpecialActions ?? 0
     } as TechDraftStep)
 
