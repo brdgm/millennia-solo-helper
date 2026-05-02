@@ -34,15 +34,15 @@
   </button>
 
   <div class="draftedCards">
-    <div v-if="playerTechs.length > 0" class="mt-3">
-      <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="playerTechs"/>
+    <div v-if="techDraftStep.playerTechs.length > 0" class="mt-3">
+      <TechCardsPlayerDraft :navigationState="navigationState" :playerTechs="techDraftStep.playerTechs"/>
     </div>
 
-    <div v-if="botTechs.length > 0" class="mt-3">
+    <div v-if="techDraftStep.botTechs.length > 0" class="mt-3">
       <h5>{{t('phaseADrafting.botDraft')}}</h5>
       <div class="techs">
         <div class="techRow">
-          <TechCard v-for="tech of botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
+          <TechCard v-for="tech of techDraftStep.botTechs" :key="tech" :navigationState="navigationState" :tech="tech" class="techCard disabled"/>
         </div>
       </div>
     </div>
@@ -79,20 +79,17 @@ export default defineComponent({
 
     const roundData = state.rounds.find(item => item.round == props.navigationState.round)!
     const lastTechDraftStep = props.navigationState.lastDraftStep
-    const botTechs = ref(cloneDeep(lastTechDraftStep?.botTechs ?? []))
-    const playerTechs = ref(cloneDeep(lastTechDraftStep?.playerTechs ?? []))
-    const playerSpecialActions = ref(lastTechDraftStep?.playerSpecialActions ?? 0)
     const techDraftStep = ref({
       round: props.navigationState.round,
       step: props.navigationState.draftingStep,
       nextStartPlayer: lastTechDraftStep?.nextStartPlayer,
       nextArchitectPlayer: lastTechDraftStep?.nextArchitectPlayer,
-      botTechs: botTechs.value,
-      playerTechs: playerTechs.value,
+      botTechs: cloneDeep(lastTechDraftStep?.botTechs ?? []),
+      playerTechs: cloneDeep(lastTechDraftStep?.playerTechs ?? []),
       playerSpecialActions: lastTechDraftStep?.playerSpecialActions ?? 0
     } as TechDraftStep)
 
-    return { t, state, router, roundData, techDraftStep, botTechs, playerTechs, playerSpecialActions }
+    return { t, state, router, roundData, techDraftStep }
   },
   props: {
     navigationState: {
@@ -115,22 +112,22 @@ export default defineComponent({
       return this.navigationState.techCardSelection
     },
     botMarkerPlaced() : number {
-      return this.botTechs.length
+      return this.techDraftStep.botTechs.length
     },
     playerMarkerPlaced() : number {
-      return this.playerTechs.length + this.playerSpecialActions
+      return this.techDraftStep.playerTechs.length + this.techDraftStep.playerSpecialActions
     },
     draftingCompleted() : boolean {
       return this.botMarkerPlaced == 4 && this.playerMarkerPlaced == 4
     },
     playerIncomeTotal() : number {
-      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
+      return this.techDraftStep.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value < 5).reduce((a,b) => a+b, 0)
     },
     playerIncomeLockedTotal() : number {
-      return this.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
+      return this.techDraftStep.playerTechs.map(tech => this.techCardSelection.getIncome(tech)).filter(value => value == 5).reduce((a,b) => a+b, 0)
     },
     botRound8Army() : boolean {
-      return this.navigationState.round == 8 && this.botTechs.includes(Tech.ARMY)
+      return this.navigationState.round == 8 && this.techDraftStep.botTechs.includes(Tech.ARMY)
     }
   },
   methods: {
@@ -170,7 +167,7 @@ export default defineComponent({
       const draftingRowCard = botCards.draftingRow.draw()
       const draftingPriorityCard = botCards.draftingPriority.draw()
       const tech = techCardSelection.determineTech(draftingRowCard, draftingPriorityCard, prosperityCards.current.flat())
-      this.botTechs.push(tech)
+      this.techDraftStep.botTechs.push(tech)
       if (tech == Tech.ARMY) {
         this.techDraftStep.nextStartPlayer = Player.BOT
       }
@@ -191,8 +188,8 @@ export default defineComponent({
         return
       }
       this.playerTurn = false
-      this.playerTechs.push(t)
-      this.techDraftStep.playerTechs = this.playerTechs
+      this.techDraftStep.playerTechs.push(t)
+      this.techDraftStep.playerTechs = this.techDraftStep.playerTechs
       if (t == Tech.ARMY) {
         this.techDraftStep.nextStartPlayer = Player.PLAYER
       }
@@ -207,7 +204,7 @@ export default defineComponent({
         this.router.push(this.nextButtonRouteTo)
       }
       else {
-        this.playerSpecialActions++
+        this.techDraftStep.playerSpecialActions++
         this.playerTurn = false
         await this.playerTurnCompleted()
       }
@@ -221,9 +218,6 @@ export default defineComponent({
     },
     persistAndNextStep() : void {
       this.techDraftStep.techCardSelection = this.techCardSelection.toPersistence()
-      this.techDraftStep.botTechs = this.botTechs
-      this.techDraftStep.playerTechs = this.playerTechs
-      this.techDraftStep.playerSpecialActions = this.playerSpecialActions
       this.state.storeTechDraftStep(this.techDraftStep)
       this.router.push(`/round/${this.navigationState.round}/drafting/${this.techDraftStep.step+1}`)
     }
