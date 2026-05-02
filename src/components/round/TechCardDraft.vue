@@ -189,7 +189,6 @@ export default defineComponent({
       }
       this.playerTurn = false
       this.techDraftStep.playerTechs.push(t)
-      this.techDraftStep.playerTechs = this.techDraftStep.playerTechs
       if (t == Tech.ARMY) {
         this.techDraftStep.nextStartPlayer = Player.PLAYER
       }
