@@ -29,12 +29,12 @@
       "playerColor": "Wähle eine Spielfarbe für die Automa. Die Automa benötigt nur 1 Leistenmarker und 1 SP-Marker.",
       "trackTokens": "Lege den Leistenmarker auf die <b>Kriegsleiste</b> und den SP-Marker auf die <b>Siegpunktleiste</b>.",
       "startPlayer": {
-        "player": "<b>Du</b> fängst an. Nehme 10 Gold und den Führungsmarker.",
-        "bot": "<b>Automa</b> fängt an. Gebe ihr den Führungsmarker."
+        "player": "<b>Du</b> fängst an. Nimm 10 Gold und den Führungsmarker.",
+        "bot": "<b>Automa</b> fängt an. Gib ihr den Führungsmarker."
       },
       "secondPlayer": {
-        "player": "<b>Du</b> bist danach an der Reihe. Nehme 12 Gold und den Architekturmarker.",
-        "bot": "<b>Automa</b> ist danach an der Reihe. Gebe ihr den Architekturmarker."
+        "player": "<b>Du</b> bist danach an der Reihe. Nimm 12 Gold und den Architekturmarker.",
+        "bot": "<b>Automa</b> ist danach an der Reihe. Gib ihr den Architekturmarker."
       }
     },
     "botRules": {
