@@ -11,7 +11,7 @@
         <TechCard v-else :navigationState="navigationState" :tech="tech as Tech"
             :data-tech="tech"
             class="techCard"
-            :class="{disabled:hasTwoEmpty(techs) || draftingCompleted}"
+            :class="{disabled:hasTwoEmpty(techs) || draftingCompleted || busy}"
             @click="hasTwoEmpty(techs) || draftingCompleted ? () => {} : playerDraftTech(tech)"/>
       </template>
     </div>
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <button class="btn btn-primary btn-lg me-3 mt-2" @click="next()">
+  <button class="btn btn-primary btn-lg me-3 mt-2" :disabled="busy" @click="next()">
     {{t('action.next')}}
   </button>
 
@@ -104,7 +104,9 @@ export default defineComponent({
   data() {
     return {
       removeAnimation: false,
-      playerTurn: false
+      playerTurn: false,
+      // true while the automatic bot turn is processed or a turn is being completed - ignores further user input
+      busy: true
     }
   },
   computed: {
@@ -151,15 +153,17 @@ export default defineComponent({
       this.navigationState.techCardSelection.remove(tech)
     },
     async nextTurn() {
-      if (this.draftingCompleted) {
-        return
-      }
-      if (this.roundData.startPlayer == Player.BOT) {
-        await this.nextTurnBot()
+      try {
+        if (this.draftingCompleted) {
+          return
+        }
+        if (this.roundData.startPlayer == Player.BOT) {
+          await this.nextTurnBot()
+        }
         await this.nextTurnPlayer()
       }
-      else {
-        await this.nextTurnPlayer()
+      finally {
+        this.busy = false
       }
     },
     async nextTurnBot() {
@@ -180,13 +184,14 @@ export default defineComponent({
       this.playerTurn = true
     },
     async playerDraftTech(tech: (Tech|TechPlaceholder)) {
-      if (this.removeAnimation) {
+      if (this.busy || this.removeAnimation) {
         return
       }
       const t = toTech(tech)
       if (!t) {
         return
       }
+      this.busy = true
       this.playerTurn = false
       this.techDraftStep.playerTechs.push(t)
       if (t == Tech.ARMY) {
@@ -199,6 +204,10 @@ export default defineComponent({
       await this.playerTurnCompleted()
     },
     async next() {
+      if (this.busy) {
+        return
+      }
+      this.busy = true
       if (this.draftingCompleted) {
         this.router.push(this.nextButtonRouteTo)
       }
